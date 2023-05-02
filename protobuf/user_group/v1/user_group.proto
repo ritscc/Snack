@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package snack.user_group.v1;
+
+import "google/protobuf/empty.proto";
+import "snack/server_status.proto";
+
+service UserGroupService {
+  rpc CreateUserGroup(UserGroup) returns (ServerStatus) {}
+  rpc GetUserGroup(UserGroupID) returns (UserGroup) {}
+  rpc UpdateUserGroup(UserGroup) returns (ServerStatus) {}
+  rpc DeleteUserGroup(UserGroupID) returns (ServerStatus) {}
+}
+
+message UserGroup {
+  int64 id = 1; // UserGroupID (unique)
+  string name = 2; // UserGroupName
+  string description = 3;
+  string type = 4; // SystemAdmin or Community
+  string icon = 5; // UserGroupIcon
+  repeated MemberGroup member = 6; // Users who blong to UserGroup
+}
+
+message UserGroupID {
+  int64 group_id = 1; // UserGroupID
+}
+
+service MemberGroupService {
+  rpc AddUserToMemberGroup(MemberGroup) returns (ServerStatus) {}
+  rpc RemoveUserFromMemberGroup(RemoveUserFromMemberGroupRequest) returns (ServerStatus) {}
+  rpc ChangeUserGroupRole(MemberGroup) returns (ServerStatus) {}
+}
+
+message MemberGroup {
+  int64 group_id = 1; // UserGroupID
+  int64 user_id = 2; // UserID
+  string role = 3; // Role in UserGroup
+}
+
+message RemoveUserFromMemberGroupRequest {
+  int64 group_id = 1; // UserGroupID
+  int64 user_id = 2; // UserID of the User to be deleted
+}

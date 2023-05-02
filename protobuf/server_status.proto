@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package snack;
+
+message ServerStatus {
+  string status = 1;
+  string text = 2;
+}

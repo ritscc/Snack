@@ -1,0 +1,16 @@
+psyntax = "proto3";
+
+package auth.v1;
+
+import "google/protobuf/empty.proto";
+
+service Authentication {
+  rpc PublishToken(google.protobuf.Empty) returns (PublishTokenResponse) {}
+  rpc RefleshToken(google.protobuf.Empty) returns (PublishTokenResponse) {}
+  rpc RevokeToken(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
+
+message PublishTokenResponse {
+  string access_token = 1;
+  int32 expires_in = 2;
+}

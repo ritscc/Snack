@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package snack.user.v1;
+
+import "google/protobuf/empty.proto";
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {}
+  rpc GetUser(GetUserRequest) returns (User) {}
+  rpc UpdateUser(User) returns (google.protobuf.Empty) {}
+  // Delete User from retributed context
+  rpc DeleteUser(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
+
+message User {
+  int64 id = 1; // unique
+  string username = 2; // unique
+  string nick = 3;
+  string avatar = 4;
+  string role = 5;
+  string locale = 6;
+  string email = 7;
+  int32 status = 8; // like Github(UserComment)
+  option Service services = 9;
+}
+
+message Service {
+  option string twitter = 1;
+  option string github = 2;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message GetUserRequest {
+  string username = 1;
+}

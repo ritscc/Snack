@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package snack.message.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service MessageService {
+  rpc CreateMessage(Message) returns () {}
+  rpc ModifyMessage(Message) returns () {}
+  rpc GetMessage(MessageID) returns () {}
+  rpc DeleteMessage(MessageID) returns () {}
+}
+
+message Message {
+  int64 channel_id = 1; 
+  int64 user_id = 2; // Message Author
+  string content = 3; // Messsage content
+  google.protobuf.Timestamp created_time = 4;
+  google.protobuf.Timestamp updated_time = 5;
+  Mention mention = 6; // kind of mention and details
+  bool pinned = 7; // is pinned
+  optional repeated Reaction reactions = 8;
+}
+
+message MessageID {
+  string id = 1;
+}
+
+service PinMessageService {
+  rpc PinMessage(MessageID) returns () {}
+  rpc GetPinMessage(PinMessage) returns () {}
+  rpc UnPinMessage(PinMessage) returns () {}
+}
+
+message PinMessage {
+  oneof Type {
+    int64 pin_id = 1;
+    int64 message_id = 2;
+  }
+}
+
+message Mention {
+  bool everyone = 1;  
+  repeated int64 user_groups = 2; // UserGroupID
+  repeated string member_roles = 3; // mention MenberRole
+  repeated int64 channels = 4; // ChannelID
+}

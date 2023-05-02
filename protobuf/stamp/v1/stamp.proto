@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package snack.stamp.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message Stamp {
+  string id = 1;
+  string name = 2;
+  string createrUserID = 3;
+  string fileID = 4;
+  bool isUnicode = 5;
+  google.protobuf.Timestamp createdAt = 6;
+  google.protobuf.Timestamp updatedAt = 7;
+}
+
+message StampPalette {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string createrUserID = 4;
+  repeated string stampID = 5;
+  google.protobuf.Timestamp createdAt = 6;
+  google.protobuf.Timestamp updatedAt = 7;
+}
