@@ -157,6 +157,17 @@ enum Event {
   // 		stamp_id: int64
   MESSAGE_UNSTAMPED = 56;
 
+  // MessagePined メッセージがピン止めされた
+  // 	Fields:
+  // 		user_id: int64
+  // 		message_id: int64
+  MESSAGE_PINED = 57;
+  // MessageUnpinned メッセージのピン止めが消去された
+  // 	Fields:
+  // 		user_id: int64
+  // 		message_id: int64
+  MESSAGE_UNPINED = 58;
+
   // StampCreated スタンプが作成された
   // 	Fields:
   // 		stamp_id: int64
