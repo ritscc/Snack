@@ -30,7 +30,7 @@ protoで明記されていないメタデータなどの仕様
 |NOT_FOUND = 4|クライアントのファイルリクエストで該当ファイルが存在しないケース|
 |PERMISSION_DENIED = 7|権限不足|
 |UNIMPLEMENTED = 12|サービスがまだ実装されていないケース|
-|INTERNAL = 12|ザーバー内処理でのエラーのケース|
+|INTERNAL = 13|ザーバー内処理でのエラーのケース|
 |UNAUTHENTICATED = 16|ユーザーの認証に失敗したケース|
 
 [Status Codes and their use in gRPC](https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
