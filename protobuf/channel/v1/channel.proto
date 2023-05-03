@@ -4,14 +4,35 @@ package snack.channel.v1;
 
 import "google/protobuf/timestamp.proto";
 
-service Channel {
+service ChannelService {
   rpc CreateChannel() returns () {}
   rpc GetChannel() returns () {}
   rpc ModifyChannel() returns () {}
   rpc DeleteChannel() returns () {}
-
-  /* rpc ChannelStream(stream ChannelMessage) returns (stream ChannelMessage) {} */
 }
+
+// メッセージチャンネルの機能（メッセージチャンネルに入らないとメッセージが見れない）
+service MessageChannelService {
+  rpc LeaveMessageChannel() returns () {}
+  rpc JoinMessageChannel() returns () {}
+}
+
+//  ボイスチャンネルに入る
+service VoiceChannelService {
+  rpc LeaveMessageChannel() returns () {}
+  rpc JoinMessageChannel() returns () {}
+}
+
+// KC3やHackathonのEventをいつやるかなどチャンネルに告知する機能
+service ChannelEventService {
+  rpc CreateChannelEvent() returns () {}
+  rpc GetChannelEvent() returns () {}
+  rpc ModifyChannelEvent() returns () {}
+  rpc DeleteChannelEvent() returns () {}
+
+  /* rpc ReactChannelEvent() returns () {} */
+}
+
 
 message ChannelMessage {
   RequestType request_type = 1;
@@ -33,10 +54,10 @@ enum RequestType {
   CHANNEL_READ = 2;
   CHANNEL_DELETE = 3;
   CHANNEL_JOIN = 4;
-  CHANNEL_EVENTCREATE = 5;
-  CHANNEL_EVENTUPDATE = 6;
-  CHANNEL_EVENTREAD = 7;
-  CHANNEL_EVENTDELETE = 8;
+  CHANNEL_EVENT_CREATE = 5;
+  CHANNEL_EVENT_UPDATE = 6;
+  CHANNEL_EVENT_READ = 7;
+  CHANNEL_EVENT_DELETE = 8;
 }
 
 message DefaultChannel {
@@ -49,21 +70,25 @@ message DefaultChannel {
   repeated string user_id = 7;
 }
 
+// 個人チャンネル
 message PrivateChannel {
   string channel_id = 2;
   string user_id = 1;
 }
 
+// 1v1のダイレクトメッセージチャンネル
 message DMChannel {
   string channel_id = 2;
   string other_user_id = 1;
 }
 
+// 通知を行うチャンネル
 message ChannelSubscription {
   string channel_id = 1;
   bool notify = 2;
 }
 
+// KC3やHackathonのEventをいつやるかなどチャンネルに告知する機能
 message ChannelEvent {
   string id = 1;
   string channel_id = 2;
