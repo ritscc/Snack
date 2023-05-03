@@ -1,0 +1,172 @@
+syntax = "proto3";
+
+package event.v1;
+
+import "google/protobuf/empty.proto";
+
+service EventService {
+  rpc EventStream(google.protobuf.Empty) returns (stream EventResponse) {}
+}
+
+message EventResponse {
+  Event event_type = 1;
+  optional int64 user_id = 2;
+  optional int64 group_id = 3;
+  optional int64 channel_id = 4;
+  optional int64 channel_event_id = 5;
+  optional int64 message_id = 6;
+  optional int64 stamp_id = 7;
+}
+
+enum Event {
+  // UserCreated ユーザーが追加された
+  // 	Fields:
+  // 		user_id: int64
+  USER_CREATED = 0;
+  // UserUpdated ユーザー情報が更新された
+  // 	Fields:
+  // 		user_id: int64
+  USER_UPDATED = 1;
+  // UserUpdated ユーザーが消去された
+  // 	Fields:
+  // 		user_id: int64
+  USER_DELETED = 2;
+
+  // UserOnline ユーザーがオンラインになった
+  // 	Fields:
+  // 		user_id: int64
+  USER_ONLINE = 5;
+  // UserOffline ユーザーがオフラインになった
+  // 	Fields:
+  // 		user_id: int64
+  USER_OFFLINE = 6;
+
+  // UserGroupCreated ユーザーグループが作成された
+  // 	Fields:
+  // 		group_id: int64
+  USER_GROUP_CREATED = 10;
+  // UserGroupUpdated ユーザーグループ設定が更新された
+  // 	Fields:
+  // 		group_id: int64
+  USER_GROUP_UPDATED = 11;
+  // UserGroupDeleted ユーザーグループが消去された
+  // 	Fields:
+  // 		group_id: int64
+  USER_GROUP_DELETED = 12;
+
+  // MemberGroupAdded ユーザーグループにユーザーが追加された
+  // 	Fields:
+  // 		user_id: int64
+  // 		group_id: int64
+  MEMBER_GROUP_ADDED = 15;
+  // MemberGroupUpdated ユーザーグループでのユーザー設定が更新された
+  // 	Fields:
+  // 		user_id: int64
+  // 		group_id: int64
+  MEMBER_GROUP_UPDATED = 16;
+  // MemberGroupAdded ユーザーグループからユーザーが消去された
+  // 	Fields:
+  // 		user_id: int64
+  // 		group_id: int64
+  MEMBER_GROUP_REMOVED = 17;
+
+  // ChannelCreated チャンネルが作成された
+  // 	Fields:
+  // 		channel_id: int64
+  CHANNEL_CREATED = 20;
+  // ChannelUpdated チャンネル設定が更新された
+  // 	Fields:
+  // 		channel_id: int64
+  CHANNEL_UPDATED = 21;
+  // ChannelDeleted チャンネルが消去された
+  // 	Fields:
+  // 		channel_id: int64
+  CHANNEL_DELETED = 22;
+
+  // MessageChannelJoined メッセージチャンネルにユーザーが参加した
+  // 	Fields:
+  // 		user_id: int64
+  // 		channel_id: int64
+  MESSAGE_CHANNEL_JOINED = 25;
+  // MessageChannelJoined メッセージチャンネルからユーザーが退室した
+  // 	Fields:
+  // 		user_id: int64
+  // 		channel_id: int64
+  MESSAGE_CHANNEL_LEAVED = 26;
+
+  // VoiceChannelJoined ボイスチャンネルにユーザーが参加した
+  // 	Fields:
+  // 		user_id: int64
+  // 		channel_id: int64
+  VOICE_CHANNEL_JOINED = 30;
+  // VoiceChannelJoined ボイスチャンネルからユーザーが退室した
+  // 	Fields:
+  // 		user_id: int64
+  // 		channel_id: int64
+  VOICE_CHANNEL_LEAVED = 31;
+
+  // ChannelEventCreated チャンネルイベントが作成された
+  // 	Fields:
+  // 		channel_event_id: int64
+  CHANNEL_EVENT_CREATED = 35;
+  // ChannelEventUpdated チャンネルイベントが更新された
+  // 	Fields:
+  // 		channel_event_id: int64
+  CHANNEL_EVENT_UPDATED = 36;
+  // ChannelEventDeleted チャンネルイベントが消去された
+  // 	Fields:
+  // 		channel_event_id: int64
+  CHANNEL_EVENT_DELETED = 37;
+
+  // ChannelEventStamped チャンネルイベントがスタンプされた
+  // 	Fields:
+  // 		user_id: int64
+  // 		channel_event_id: int64
+  // 		stamp_id: int64
+  CHANNEL_EVENT_STAMPED = 40;
+  // ChannelEventStamped チャンネルイベントに対してのスタンプが消去された
+  // 	Fields:
+  // 		user_id: int64
+  // 		channel_event_id: int64
+  // 		stamp_id: int64
+  CHANNEL_EVENT_UNSTAMPED = 41;
+
+  // MessageCreated メッセージが作成された
+  // 	Fields:
+  // 		message_id: int64
+  MESSAGE_CREATED = 50;
+  // MessageCreated メッセージが更新された
+  // 	Fields:
+  // 		message_id: int64
+  MESSAGE_UPDATED = 51;
+  // MessageCreated メッセージが消去された
+  // 	Fields:
+  // 		message_id: int64
+  MESSAGE_DELETED = 52;
+
+  // MessageStamped メッセージがスタンプされた
+  // 	Fields:
+  // 		user_id: int64
+  // 		message_id: int64
+  // 		stamp_id: int64
+  MESSAGE_STAMPED = 55;
+  // MessageStamped メッセージに対してのスタンプが消去された
+  // 	Fields:
+  // 		user_id: int64
+  // 		message_id: int64
+  // 		stamp_id: int64
+  MESSAGE_UNSTAMPED = 56;
+
+  // StampCreated スタンプが作成された
+  // 	Fields:
+  // 		stamp_id: int64
+  STAMP_CREATED = 60;
+  // StampUpdated スタンプ情報が更新された
+  // 	Fields:
+  // 		stamp_id: int64
+  STAMP_UPDATED = 61;
+  // StampDeleted スタンプが消去された
+  // 	Fields:
+  // 		stamp_id: int64
+  STAMP_DELETED = 62;
+}
