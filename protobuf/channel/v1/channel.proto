@@ -3,18 +3,20 @@ syntax = "proto3";
 package snack.channel.v1;
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 service ChannelService {
-  rpc CreateChannel() returns () {}
-  rpc GetChannel() returns () {}
-  rpc ModifyChannel() returns () {}
-  rpc DeleteChannel() returns () {}
+  rpc CreateChannel() returns (google.protobuf.Empty) {}
+  rpc GetChannel(ChannelID) returns (Channel) {}
+  rpc UpdateChannel(ChannelRequest) returns (google.protobuf.Empty) {}
+  // Only Admin and Creator can delete
+  rpc DeleteChannel(ChannelID) returns (google.protobuf.Empty) {}
 }
 
 // メッセージチャンネルの機能（メッセージチャンネルに入らないとメッセージが見れない）
 service MessageChannelService {
-  rpc LeaveMessageChannel() returns () {}
-  rpc JoinMessageChannel() returns () {}
+  rpc LeaveMessageChannel(MessageChannelRequest) returns (google.protobuf.Empty) {}
+  rpc JoinMessageChannel(MessageChannelRequest) returns (google.protobuf.Empty) {}
 }
 
 //  ボイスチャンネルに入る
@@ -25,21 +27,22 @@ service VoiceChannelService {
 
 // KC3やHackathonのEventをいつやるかなどチャンネルに告知する機能
 service ChannelEventService {
-  rpc CreateChannelEvent() returns () {}
-  rpc GetChannelEvent() returns () {}
-  rpc ModifyChannelEvent() returns () {}
-  rpc DeleteChannelEvent() returns () {}
-
-  /* rpc ReactChannelEvent() returns () {} */
+  rpc CreateChannelEvent(CreateChannelEventRequest) returns (google.protobuf.Empty) {}
+  rpc GetChannelEvent(ChannelEventID) returns (ChannelEvent) {}
+  rpc UpdateChannelEvent(ChannelEvent) returns (google.protobuf.Empty) {}
+  // Only Admin and Creator can delete
+  rpc DeleteChannelEvent(ChannelEventID) returns (google.protobuf.Empty) {}
 }
 
+message ChannelID {
+  int64 channel_id = 1;
+}
 
-message ChannelMessage {
-  RequestType request_type = 1;
+message Channel {  
   oneof channel_group {
-    DefaultChannel default_channel = 2;
+    DefaultChannel default_channel = 1;
+    PrivateChannel private_channel = 2;
     DMChannel dm_channel = 3;
-    ChannelEvent channel_event = 4;
   }
 }
 
@@ -48,51 +51,77 @@ enum ChannelType {
   CHANNEL_VOICE = 1;
 }
 
-enum RequestType {
-  CHANNEL_CREATE = 0;
-  CHANNEL_UPDATE = 1;
-  CHANNEL_READ = 2;
-  CHANNEL_DELETE = 3;
-  CHANNEL_JOIN = 4;
-  CHANNEL_EVENT_CREATE = 5;
-  CHANNEL_EVENT_UPDATE = 6;
-  CHANNEL_EVENT_READ = 7;
-  CHANNEL_EVENT_DELETE = 8;
-}
-
 message DefaultChannel {
-  string id = 1;
+  int64 channel_id = 1;
   ChannelType channel_type = 2;
   int64 position = 3;
   string name = 4;
   bool private = 5;
   bool nsfw = 6;
-  repeated string user_id = 7;
+  repeated int64 user_id = 7;
 }
 
 // 個人チャンネル
 message PrivateChannel {
-  string channel_id = 2;
-  string user_id = 1;
+  int64 channel_id = 2;
+  int64 user_id = 1;
 }
 
 // 1v1のダイレクトメッセージチャンネル
 message DMChannel {
-  string channel_id = 2;
-  string other_user_id = 1;
+  int64 channel_id = 1;
+  int64 other_user_id = 2;
 }
 
 // 通知を行うチャンネル
 message ChannelSubscription {
-  string channel_id = 1;
+  int64 channel_id = 1;
   bool notify = 2;
+}
+
+message CreateChannelRequest {
+  oneof create_channel_group {
+    CreateDefaultChannelRequest default_channel_request = 1;
+    CreateDMRequest dm_channel_request = 2;
+  }
+}
+
+message CreateDefaultChannelRequest {
+  ChannelType channel_type = 2;
+  int64 position = 3;
+  string name = 4;
+  bool private = 5;
+  bool nsfw = 6;
+  repeated int64 user_id = 7;
+}
+
+message CreateDMRequest{
+  int64 other_user_id 1;
+}
+
+message MessageChannelRequest {
+  int64 channel_id
 }
 
 // KC3やHackathonのEventをいつやるかなどチャンネルに告知する機能
 message ChannelEvent {
-  string id = 1;
-  string channel_id = 2;
+  int64 id = 1;
+  int64 channel_id = 2;
   string event_type = 3;
-  string detail = 4;
-  google.protobuf.Timestamp date_time = 5;
+  string title = 4;
+  string detail = 5;
+  google.protobuf.Timestamp date = 6;
 }
+
+message CreateChannelEventRequest {
+  int64 channel_id = 2;
+  string event_type = 3;
+  string title = 4;
+  string detail = 5;
+  google.protobuf.Timestamp date = 6;
+}
+
+message ChannelEventID {
+  int64 channel_event_id = 1;
+}
+
