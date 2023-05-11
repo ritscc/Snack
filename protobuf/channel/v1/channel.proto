@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 service ChannelService {
   rpc CreateChannel(CreateChannelRequest) returns (google.protobuf.Empty) {}
   rpc GetChannel(ChannelID) returns (Channel) {}
-  rpc UpdateChannel(ChannelRequest) returns (google.protobuf.Empty) {}
+  rpc UpdateChannel(Channel) returns (google.protobuf.Empty) {}
   // Only Admin and Creator can delete
   rpc DeleteChannel(ChannelID) returns (google.protobuf.Empty) {}
 }

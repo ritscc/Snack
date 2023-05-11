@@ -1,4 +1,4 @@
-psyntax = "proto3";
+syntax = "proto3";
 
 package auth.v1;
 
