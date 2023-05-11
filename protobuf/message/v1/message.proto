@@ -5,9 +5,11 @@ package snack.message.v1;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
+option go_package = "github.com/ritscc/Snack/backend/pb/message/v1;message";
+
 service MessageService {
   rpc CreateMessage(CreateMessageRequest) returns (google.protobuf.Emtpy) {}
-  rpc UpdateMessage(Message) returns (google.protobuf.Emtpy) {}
+  rpc UpdateMessage(UpdateMessageRequest) returns (google.protobuf.Emtpy) {}
   rpc GetMessage(MessageID) returns (Message) {}
   rpc DeleteMessage(MessageID) returns (google.protobuf.Emtpy) {}
 }
@@ -21,7 +23,7 @@ message Message {
   google.protobuf.Timestamp updated_time = 6;
   Mention mention = 7; // kind of mention and details
   bool pinned = 8; // is pinned
-  optional repeated Reaction reactions = 9;
+  optional repated int64 stamp_id = 6;
 }
 
 message MessageID {
@@ -32,11 +34,18 @@ message CreateMessageRequest {
   int64 channel_id = 1; 
   int64 user_id = 2; // Message Author
   string content = 3; // Messsage content
-  google.protobuf.Timestamp created_time = 4;
-  google.protobuf.Timestamp updated_time = 5;
-  Mention mention = 6; // kind of mention and details
-  bool pinned = 7; // is pinned
-  optional repeated Reaction reactions = 8;
+  Mention mention = 4; // kind of mention and details
+  bool pinned = 5; // is pinned
+}
+
+message UpdateMessageRequest{
+  int64 message_id =1;
+  int64 channel_id = 2; 
+  int64 user_id = 3; // Message Author
+  string content = 4; // Messsage content
+  Mention mention = 7; // kind of mention and details
+  bool pinned = 8; // is pinned
+  optional repated int64 stamp_id = 6;
 }
 
 service PinMessageService {
