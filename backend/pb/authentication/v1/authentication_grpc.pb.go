@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthenticationClient interface {
 	PublishToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*PublishTokenResponse, error)
-	RefleshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*PublishTokenResponse, error)
+	RefreshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*PublishTokenResponse, error)
 	RevokeToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -45,9 +45,9 @@ func (c *authenticationClient) PublishToken(ctx context.Context, in *emptypb.Emp
 	return out, nil
 }
 
-func (c *authenticationClient) RefleshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*PublishTokenResponse, error) {
+func (c *authenticationClient) RefreshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*PublishTokenResponse, error) {
 	out := new(PublishTokenResponse)
-	err := c.cc.Invoke(ctx, "/auth.v1.Authentication/RefleshToken", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/auth.v1.Authentication/RefreshToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ func (c *authenticationClient) RevokeToken(ctx context.Context, in *emptypb.Empt
 // for forward compatibility
 type AuthenticationServer interface {
 	PublishToken(context.Context, *emptypb.Empty) (*PublishTokenResponse, error)
-	RefleshToken(context.Context, *emptypb.Empty) (*PublishTokenResponse, error)
+	RefreshToken(context.Context, *emptypb.Empty) (*PublishTokenResponse, error)
 	RevokeToken(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAuthenticationServer()
 }
@@ -80,8 +80,8 @@ type UnimplementedAuthenticationServer struct {
 func (UnimplementedAuthenticationServer) PublishToken(context.Context, *emptypb.Empty) (*PublishTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PublishToken not implemented")
 }
-func (UnimplementedAuthenticationServer) RefleshToken(context.Context, *emptypb.Empty) (*PublishTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RefleshToken not implemented")
+func (UnimplementedAuthenticationServer) RefreshToken(context.Context, *emptypb.Empty) (*PublishTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
 func (UnimplementedAuthenticationServer) RevokeToken(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RevokeToken not implemented")
@@ -117,20 +117,20 @@ func _Authentication_PublishToken_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Authentication_RefleshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Authentication_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthenticationServer).RefleshToken(ctx, in)
+		return srv.(AuthenticationServer).RefreshToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth.v1.Authentication/RefleshToken",
+		FullMethod: "/auth.v1.Authentication/RefreshToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthenticationServer).RefleshToken(ctx, req.(*emptypb.Empty))
+		return srv.(AuthenticationServer).RefreshToken(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -165,8 +165,8 @@ var Authentication_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Authentication_PublishToken_Handler,
 		},
 		{
-			MethodName: "RefleshToken",
-			Handler:    _Authentication_RefleshToken_Handler,
+			MethodName: "RefreshToken",
+			Handler:    _Authentication_RefreshToken_Handler,
 		},
 		{
 			MethodName: "RevokeToken",
