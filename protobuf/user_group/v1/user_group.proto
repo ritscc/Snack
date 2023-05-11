@@ -4,7 +4,7 @@ package snack.user_group.v1;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/ritscc/Snack/genproto/user_group/v1;user_group";
+option go_package = "github.com/ritscc/Snack/backend/pb/user_group/v1;user_group";
 
 service UserGroupService {
   rpc CreateUserGroup(CreateUserGroupRequest) returns (google.protobuf.Emtpy) {}

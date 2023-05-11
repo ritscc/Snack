@@ -4,7 +4,7 @@ package auth.v1;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/ritscc/Snack/genproto/authentication/v1;authentication";
+option go_package = "github.com/ritscc/Snack/backend/pb/authentication/v1;authentication";
 
 service Authentication {
   rpc PublishToken(google.protobuf.Empty) returns (PublishTokenResponse) {}
