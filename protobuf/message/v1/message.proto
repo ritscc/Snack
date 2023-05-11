@@ -23,7 +23,7 @@ message Message {
   google.protobuf.Timestamp updated_time = 6;
   Mention mention = 7; // kind of mention and details
   bool pinned = 8; // is pinned
-  optional repeated int64 stamp_id = 6;
+  optional repeated int64 stamp_id = 9;
 }
 
 message MessageID {
@@ -43,9 +43,9 @@ message UpdateMessageRequest{
   int64 channel_id = 2; 
   int64 user_id = 3; // Message Author
   string content = 4; // Messsage content
-  Mention mention = 7; // kind of mention and details
-  bool pinned = 8; // is pinned
-  optional repeated int64 stamp_id = 6;
+  Mention mention = 5; // kind of mention and details
+  bool pinned = 6; // is pinned
+  optional repeated int64 stamp_id = 7;
 }
 
 service PinMessageService {
