@@ -5,14 +5,14 @@ package snack.user_group.v1;
 import "google/protobuf/empty.proto";
 
 service UserGroupService {
-  rpc CreateUserGroup(UserGroupRequest) returns (google.protobuf.Emtpy) {}
+  rpc CreateUserGroup(CreateUserGroupRequest) returns (google.protobuf.Emtpy) {}
   rpc GetUserGroup(UserGroupID) returns (UserGroup) {}
-  rpc UpdateUserGroup(UserGroupRequest) returns (google.protobuf.Empty) {}
+  rpc UpdateUserGroup(UpdateUserGroupRequest) returns (google.protobuf.Empty) {}
   rpc DeleteUserGroup(UserGroupID) returns (google.protobuf.Empty) {}
 }
 
 message UserGroup {
-  int64 id = 1; // UserGroupID (unique)
+  int64 group_id = 1; // UserGroupID (unique)
   string name = 2; // UserGroupName
   string description = 3;
   string type = 4; // SystemAdmin or Community
@@ -25,11 +25,22 @@ message UserGroupID {
   int64 group_id = 1; // UserGroupID
 }
 
-message UserGroupRequest {
+message CreateUserGroupRequest {
   string name = 1; // UserGroupName
   string description = 2;
   string type = 3; // SystemAdmin or Community
   string icon = 4; // UserGroupIcon
+  string role = 5;
+  repeated Member member = 10; // Users who blong to UserGroup
+}
+
+message UpdateUserGroupRequest {
+  int64 group_id = 1; // UserGroupID
+  string name = 1; // UserGroupName
+  string description = 2;
+  string type = 3; // SystemAdmin or Community
+  string icon = 4; // UserGroupIcon
+  string role = 5;
   repeated Member member = 10; // Users who blong to UserGroup
 }
 
