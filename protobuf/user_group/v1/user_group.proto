@@ -20,7 +20,7 @@ message UserGroup {
   string type = 4; // SystemAdmin or Community
   string icon = 5; // UserGroupIcon
   string role = 6;
-  repeated Member member = 10; // Users who blong to UserGroup
+  repeated Member member = 10; // Users who belong to UserGroup
 }
 
 message UserGroupID {
@@ -33,7 +33,7 @@ message CreateUserGroupRequest {
   string type = 3; // SystemAdmin or Community
   string icon = 4; // UserGroupIcon
   string role = 5;
-  repeated Member member = 10; // Users who blong to UserGroup
+  repeated Member member = 10; // Users who belong to UserGroup
 }
 
 message UpdateUserGroupRequest {
@@ -43,7 +43,7 @@ message UpdateUserGroupRequest {
   string type = 4; // SystemAdmin or Community
   string icon = 5; // UserGroupIcon
   string role = 6;
-  repeated Member member = 10; // Users who blong to UserGroup
+  repeated Member member = 10; // Users who belong to UserGroup
 }
 
 service MemberService {

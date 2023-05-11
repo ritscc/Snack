@@ -8,7 +8,7 @@ option go_package = "github.com/ritscc/Snack/backend/pb/authentication/v1;authen
 
 service Authentication {
   rpc PublishToken(google.protobuf.Empty) returns (PublishTokenResponse) {}
-  rpc RefleshToken(google.protobuf.Empty) returns (PublishTokenResponse) {}
+  rpc RefreshToken(google.protobuf.Empty) returns (PublishTokenResponse) {}
   rpc RevokeToken(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
