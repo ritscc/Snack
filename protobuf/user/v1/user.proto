@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package snack.user.v1;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/ritscc/Snack/backend/pb/user/v1;user";
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {}
+  rpc GetUser(GetUserRequest) returns (User) {}
+  rpc UpdateUser(User) returns (google.protobuf.Empty) {}
+  // Delete User from retributed grpc metadata
+  rpc DeleteUser(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
+
+message User {
+  int64 user_id = 1; // unique
+  string username = 2; // unique
+  string nick = 3; // nickname
+  string real_name = 4;
+  string avatar = 5; // icon
+  string role = 6;
+  string locale = 7; // Japan or Korea
+  string rits_email = 8; // ed.ritsumei.ac.jp
+  optional string own_email = 9; // gmail.com など
+  string comment = 10;
+  Status status = 11; // ONLINE or OFFLINE
+  optional Service services = 20; // Twitter, Github, Discord
+}
+
+message Service {
+  optional string twitter = 1;
+  optional string github = 2;
+  optional string discord = 3;
+}
+
+enum Status {
+  ONLINE = 0;
+  OFFLINE = 1;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message GetUserRequest {
+  string user_id = 1;
+}
