@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package snack.channel.v1;
 
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 service ChannelService {
-  rpc CreateChannel() returns (google.protobuf.Empty) {}
+  rpc CreateChannel(CreateChannelRequest) returns (google.protobuf.Empty) {}
   rpc GetChannel(ChannelID) returns (Channel) {}
   rpc UpdateChannel(ChannelRequest) returns (google.protobuf.Empty) {}
   // Only Admin and Creator can delete
@@ -20,10 +20,10 @@ service MessageChannelService {
 }
 
 //  ボイスチャンネルに入る
-service VoiceChannelService {
-  rpc LeaveMessageChannel() returns () {}
-  rpc JoinMessageChannel() returns () {}
-}
+/* service VoiceChannelService {             */
+/*   rpc LeaveMessageChannel() returns () {} */
+/*   rpc JoinMessageChannel() returns () {}  */
+/* }                                         */
 
 // KC3やHackathonのEventをいつやるかなどチャンネルに告知する機能
 service ChannelEventService {
@@ -38,7 +38,7 @@ message ChannelID {
   int64 channel_id = 1;
 }
 
-message Channel {  
+message Channel {
   oneof channel_group {
     DefaultChannel default_channel = 1;
     PrivateChannel private_channel = 2;
@@ -87,20 +87,20 @@ message CreateChannelRequest {
 }
 
 message CreateDefaultChannelRequest {
-  ChannelType channel_type = 2;
-  int64 position = 3;
-  string name = 4;
-  bool private = 5;
-  bool nsfw = 6;
-  repeated int64 user_id = 7;
+  ChannelType channel_type = 1;
+  int64 position = 2;
+  string name = 3;
+  bool private = 4;
+  bool nsfw = 5;
+  repeated int64 user_id = 6;
 }
 
-message CreateDMRequest{
-  int64 other_user_id 1;
+message CreateDMRequest {
+  int64 other_user_id = 1;
 }
 
 message MessageChannelRequest {
-  int64 channel_id
+  int64 channel_id = 1;
 }
 
 // KC3やHackathonのEventをいつやるかなどチャンネルに告知する機能
@@ -114,14 +114,13 @@ message ChannelEvent {
 }
 
 message CreateChannelEventRequest {
-  int64 channel_id = 2;
-  string event_type = 3;
-  string title = 4;
-  string detail = 5;
-  google.protobuf.Timestamp date = 6;
+  int64 channel_id = 1;
+  string event_type = 2;
+  string title = 3;
+  string detail = 4;
+  google.protobuf.Timestamp date = 5;
 }
 
 message ChannelEventID {
   int64 channel_event_id = 1;
 }
-
