@@ -8,10 +8,10 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/ritscc/Snack/backend/pb/message/v1;message";
 
 service MessageService {
-  rpc CreateMessage(CreateMessageRequest) returns (google.protobuf.Emtpy) {}
-  rpc UpdateMessage(UpdateMessageRequest) returns (google.protobuf.Emtpy) {}
+  rpc CreateMessage(CreateMessageRequest) returns (google.protobuf.Empty) {}
+  rpc UpdateMessage(UpdateMessageRequest) returns (google.protobuf.Empty) {}
   rpc GetMessage(MessageID) returns (Message) {}
-  rpc DeleteMessage(MessageID) returns (google.protobuf.Emtpy) {}
+  rpc DeleteMessage(MessageID) returns (google.protobuf.Empty) {}
 }
 
 message Message {
@@ -49,12 +49,12 @@ message UpdateMessageRequest {
 }
 
 service PinMessageService {
-  rpc PinMessage(MessageID) returns (google.protobuf.Emtpy) {}
-  rpc GetPinMessage(PinMessage) returns (PinMessage) {}
-  rpc UnPinMessage(PinMessage) returns (google.protobuf.Emtpy) {}
+  rpc PinMessage(MessageID) returns (google.protobuf.Empty) {}
+  rpc GetPinMessage(PinnedMessage) returns (PinnedMessage) {}
+  rpc UnPinMessage(PinnedMessage) returns (google.protobuf.Empty) {}
 }
 
-message PinMessage {
+message PinnedMessage {
   oneof Type {
     int64 pin_id = 1;
     int64 message_id = 2;
