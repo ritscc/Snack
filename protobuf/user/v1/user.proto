@@ -16,13 +16,14 @@ message User {
   int64 user_id = 1; // unique
   string username = 2; // unique
   string nick = 3; // nickname
-  string avatar = 4; // icon
-  string role = 5;
-  string locale = 6; // Japan or Korea
-  string rits_email = 7; // ed.ritsumei.ac.jp
-  optional string own_email = 8; // gmail.com など
-  string comment = 9;
-  Status status = 10; // ONLINE or OFFLINE
+  string real_name = 4;
+  string avatar = 5; // icon
+  string role = 6;
+  string locale = 7; // Japan or Korea
+  string rits_email = 8; // ed.ritsumei.ac.jp
+  optional string own_email = 9; // gmail.com など
+  string comment = 10;
+  Status status = 11; // ONLINE or OFFLINE
   optional Service services = 20; // Twitter, Github, Discord
 }
 
