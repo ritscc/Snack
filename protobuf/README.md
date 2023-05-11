@@ -20,6 +20,12 @@ protoで明記されていないメタデータなどの仕様
 
 ### serverからclientへのレスポンスが満たすべき仕様
 
+### IDの生成について
+
+すべてのClientからのCreateRequestはIDを保持していない。  
+理由は、IDを付与すると現状ではUUIDではないため、衝突する可能性が極めて高い。  
+そのためすべてのIDはサーバーで生成され、GetRequestによってClientに伝達される形式をとる。  
+
 #### エラーなどのステータスコード
 
 |grpc status code|例|
