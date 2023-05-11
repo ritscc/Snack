@@ -27,7 +27,7 @@ enum Event {
   // 	Fields:
   // 		user_id: int64
   USER_UPDATED = 1;
-  // UserUpdated ユーザーが消去された
+  // UserDeleted ユーザーが消去された
   // 	Fields:
   // 		user_id: int64
   USER_DELETED = 2;
@@ -54,21 +54,21 @@ enum Event {
   // 		group_id: int64
   USER_GROUP_DELETED = 12;
 
-  // MemberGroupAdded ユーザーグループにユーザーが追加された
+  // MemberAdded ユーザーグループにユーザーが追加された
   // 	Fields:
   // 		user_id: int64
   // 		group_id: int64
-  MEMBER_GROUP_ADDED = 15;
-  // MemberGroupUpdated ユーザーグループでのユーザー設定が更新された
+  MEMBER_ADDED = 15;
+  // MemberUpdated ユーザーグループでのユーザー設定が更新された
   // 	Fields:
   // 		user_id: int64
   // 		group_id: int64
-  MEMBER_GROUP_UPDATED = 16;
-  // MemberGroupAdded ユーザーグループからユーザーが消去された
+  MEMBER_UPDATED = 16;
+  // MemberRemoved ユーザーグループからユーザーが消去された
   // 	Fields:
   // 		user_id: int64
   // 		group_id: int64
-  MEMBER_GROUP_REMOVED = 17;
+  MEMBER_REMOVED = 17;
 
   // ChannelCreated チャンネルが作成された
   // 	Fields:
@@ -88,7 +88,7 @@ enum Event {
   // 		user_id: int64
   // 		channel_id: int64
   MESSAGE_CHANNEL_JOINED = 25;
-  // MessageChannelJoined メッセージチャンネルからユーザーが退室した
+  // MessageChannelLeaved メッセージチャンネルからユーザーが退室した
   // 	Fields:
   // 		user_id: int64
   // 		channel_id: int64
@@ -99,7 +99,7 @@ enum Event {
   // 		user_id: int64
   // 		channel_id: int64
   VOICE_CHANNEL_JOINED = 30;
-  // VoiceChannelJoined ボイスチャンネルからユーザーが退室した
+  // VoiceChannelLeaved ボイスチャンネルからユーザーが退室した
   // 	Fields:
   // 		user_id: int64
   // 		channel_id: int64
@@ -124,7 +124,7 @@ enum Event {
   // 		channel_event_id: int64
   // 		stamp_id: int64
   CHANNEL_EVENT_STAMPED = 40;
-  // ChannelEventStamped チャンネルイベントに対してのスタンプが消去された
+  // ChannelEventUnstamped チャンネルイベントに対してのスタンプが消去された
   // 	Fields:
   // 		user_id: int64
   // 		channel_event_id: int64
@@ -135,11 +135,11 @@ enum Event {
   // 	Fields:
   // 		message_id: int64
   MESSAGE_CREATED = 50;
-  // MessageCreated メッセージが更新された
+  // MessageUpdated メッセージが更新された
   // 	Fields:
   // 		message_id: int64
   MESSAGE_UPDATED = 51;
-  // MessageCreated メッセージが消去された
+  // MessageDeleted メッセージが消去された
   // 	Fields:
   // 		message_id: int64
   MESSAGE_DELETED = 52;
@@ -150,23 +150,23 @@ enum Event {
   // 		message_id: int64
   // 		stamp_id: int64
   MESSAGE_STAMPED = 55;
-  // MessageStamped メッセージに対してのスタンプが消去された
+  // MessageUnstamped メッセージに対してのスタンプが消去された
   // 	Fields:
   // 		user_id: int64
   // 		message_id: int64
   // 		stamp_id: int64
   MESSAGE_UNSTAMPED = 56;
 
-  // MessagePined メッセージがピン止めされた
+  // MessagePinned メッセージがピン止めされた
   // 	Fields:
   // 		user_id: int64
   // 		message_id: int64
-  MESSAGE_PINED = 57;
+  MESSAGE_PINNED = 57;
   // MessageUnpinned メッセージのピン止めが消去された
   // 	Fields:
   // 		user_id: int64
   // 		message_id: int64
-  MESSAGE_UNPINED = 58;
+  MESSAGE_UNPINNED = 58;
 
   // StampCreated スタンプが作成された
   // 	Fields:
