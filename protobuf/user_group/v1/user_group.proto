@@ -3,41 +3,60 @@ syntax = "proto3";
 package snack.user_group.v1;
 
 import "google/protobuf/empty.proto";
-import "snack/server_status.proto";
 
 service UserGroupService {
-  rpc CreateUserGroup(UserGroup) returns (ServerStatus) {}
+  rpc CreateUserGroup(CreateUserGroupRequest) returns (google.protobuf.Emtpy) {}
   rpc GetUserGroup(UserGroupID) returns (UserGroup) {}
-  rpc UpdateUserGroup(UserGroup) returns (ServerStatus) {}
-  rpc DeleteUserGroup(UserGroupID) returns (ServerStatus) {}
+  rpc UpdateUserGroup(UpdateUserGroupRequest) returns (google.protobuf.Empty) {}
+  rpc DeleteUserGroup(UserGroupID) returns (google.protobuf.Empty) {}
 }
 
 message UserGroup {
-  int64 id = 1; // UserGroupID (unique)
+  int64 group_id = 1; // UserGroupID (unique)
   string name = 2; // UserGroupName
   string description = 3;
   string type = 4; // SystemAdmin or Community
   string icon = 5; // UserGroupIcon
-  repeated MemberGroup member = 6; // Users who blong to UserGroup
+  string role = 6;
+  repeated Member member = 10; // Users who blong to UserGroup
 }
 
 message UserGroupID {
   int64 group_id = 1; // UserGroupID
 }
 
-service MemberGroupService {
-  rpc AddUserToMemberGroup(MemberGroup) returns (ServerStatus) {}
-  rpc RemoveUserFromMemberGroup(RemoveUserFromMemberGroupRequest) returns (ServerStatus) {}
-  rpc ChangeUserGroupRole(MemberGroup) returns (ServerStatus) {}
+message CreateUserGroupRequest {
+  string name = 1; // UserGroupName
+  string description = 2;
+  string type = 3; // SystemAdmin or Community
+  string icon = 4; // UserGroupIcon
+  string role = 5;
+  repeated Member member = 10; // Users who blong to UserGroup
 }
 
-message MemberGroup {
+message UpdateUserGroupRequest {
+  int64 group_id = 1; // UserGroupID
+  string name = 1; // UserGroupName
+  string description = 2;
+  string type = 3; // SystemAdmin or Community
+  string icon = 4; // UserGroupIcon
+  string role = 5;
+  repeated Member member = 10; // Users who blong to UserGroup
+}
+
+service MemberService {
+  rpc AddUserToMember(Member) returns (google.protobuf.Empty) {}
+  rpc RemoveUserFromMember(RemoveUserFromMemberRequest) returns (google.protobuf.Empty) {}
+  rpc ChangeMemberGrant(Member) returns (google.protobuf.Empty) {}
+}
+
+message Member {
   int64 group_id = 1; // UserGroupID
   int64 user_id = 2; // UserID
-  string role = 3; // Role in UserGroup
+  string grant = 3; // Role in UserGroup
 }
 
-message RemoveUserFromMemberGroupRequest {
+message RemoveUserFromMemberRequest {
   int64 group_id = 1; // UserGroupID
   int64 user_id = 2; // UserID of the User to be deleted
 }
