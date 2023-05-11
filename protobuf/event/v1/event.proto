@@ -4,6 +4,8 @@ package event.v1;
 
 import "google/protobuf/empty.proto";
 
+option go_package = "github.com/ritscc/Snack/genproto/event/v1;event";
+
 service EventService {
   rpc EventStream(google.protobuf.Empty) returns (stream EventResponse) {}
 }

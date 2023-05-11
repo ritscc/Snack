@@ -5,6 +5,8 @@ package snack.channel.v1;
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
+option go_package = "github.com/ritscc/Snack/genproto/channel/v1;channel";
+
 service ChannelService {
   rpc CreateChannel(CreateChannelRequest) returns (google.protobuf.Empty) {}
   rpc GetChannel(ChannelID) returns (Channel) {}

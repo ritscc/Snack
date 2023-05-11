@@ -4,6 +4,8 @@ package snack.user.v1;
 
 import "google/protobuf/empty.proto";
 
+option go_package = "github.com/ritscc/Snack/genproto/user/v1;user";
+
 service UserService {
   rpc CreateUser(CreateUserRequest) returns (google.protobuf.Empty) {}
   rpc GetUser(GetUserRequest) returns (User) {}

@@ -4,6 +4,8 @@ package snack.stamp.v1;
 
 import "google/protobuf/timestamp.proto";
 
+option go_package = "github.com/ritscc/Snack/genproto/stamp/v1;stamp";
+
 message Stamp {
   string id = 1;
   string name = 2;
