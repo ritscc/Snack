@@ -1,0 +1,9 @@
+backend: 'backend/**/*'
+
+desktop: 'desktop/**/*'
+
+mobile: 'mobile/**/*'
+
+protobuf: 'protobuf/**/*'
+
+web: 'web/**/*'
