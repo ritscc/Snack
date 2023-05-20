@@ -52,6 +52,3 @@ protoで明記されていないメタデータなどの仕様
 |UNAUTHENTICATED = 16|ユーザーの認証に失敗したケース|
 
 [Status Codes and their use in gRPC](https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
-
-
-
