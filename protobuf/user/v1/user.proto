@@ -27,6 +27,7 @@ message User {
   string comment = 10;
   Status status = 11; // ONLINE or OFFLINE
   optional Service services = 20; // Twitter, Github, Discord
+  bool is_deleted = 30;
 }
 
 message Service {
