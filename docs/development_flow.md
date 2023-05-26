@@ -23,18 +23,19 @@
 ## Projectについて
 
 Projectはタスク管理アプリのようなものです。  
-Snackでは5つの状態があります。    
+Snackでは5つの状態があります。
+
 - In Considering  
-    考案中や実際に行うかわからないIssueを割り当てる
+　考案中や実際に行うかわからないIssueを割り当てる
 - Todo  
-    Projectでやる必要があるIssueを割り当てる
+　Projectでやる必要があるIssueを割り当てる
 - In Progress  
-    ある人がIssueに対して何かしらしている(ドキュメントなら記述、機能開発なら開発中)  
-    Assigneesに誰かが割り当てられていいる
+　ある人がIssueに対して何かしらしている(ドキュメントなら記述、機能開発なら開発中)  
+　Assigneesに誰かが割り当てられていいる
 - In Review  
-    PRが作成されており、レビュー待ちの状態
+　PRが作成されており、レビュー待ちの状態
 - Done  
-    Issueが解決された
+　Issueが解決された
 
 ## Issueについて
 
@@ -62,26 +63,26 @@ Snackでは5つの状態があります。
 ## Labelの種類
 
 - backend  
-    backendに対しての提案など
+　backendに対しての提案など
 - desktop  
-    desktopに対しての提案など
+　desktopに対しての提案など
 - mobile  
-    mobile(iOS, Android)に対しての提案など
+　mobile(iOS, Android)に対しての提案など
 - CI  
-    CI(Github Action)に対しての提案など
+　CI(Github Action)に対しての提案など
 - documentation  
-    ドキュメントの整備など
+　ドキュメントの整備など
 - enhancement  
-    新しい機能の追加など
+　新しい機能の追加など
 - good first issue  
-    開発に入ったときに最初に消化しやすいIssue
+　開発に入ったときに最初に消化しやすいIssue
 - help wanted  
-    何か他の人の意見や実装のやり方がわからない時など
+　何か他の人の意見や実装のやり方がわからない時など
 - question  
-    ある機能やドキュメントに対してわからないことがあった時など
+　ある機能やドキュメントに対してわからないことがあった時など
 - search  
-    何かしら障害なので調べる必要がある時など
+　何かしら障害なので調べる必要がある時など
 - duplicate  
-    IssueやPRがすでに作られていた時など
+　IssueやPRがすでに作られていた時など
 - bug  
-    バグを見つけた時など
+　バグを見つけた時など
