@@ -1,39 +1,39 @@
 # 全体の開発作業の流れ
 
 1. 新しいIssueの作成か、既存のIssueからやることを選ぶ  
-2. devブランチから実装する機能毎にfeatureブランチを作成
-3. feature, docs, hotfixなどのブランチでのPRはdevelopブランチにスカッシュマージ(PRでやったことをコメントとして記述)
-4. リリース時点でdev → mainマージ
+2. devブランチから実装する機能毎にfeatureブランチを作成  
+3. feature, docs, hotfixなどのブランチでのPRはdevelopブランチにスカッシュマージ(PRでやったことをコメントとして記述)  
+4. リリース時点でdev → mainマージ  
 
 ## 登場するブランチ
 
-- main
+- main  
 　リリースした時点のソースコードを管理するブランチ
-- dev (mainから派生)
+- dev (mainから派生)  
 　開発作業の主軸となるブランチ
-- hotfix (mainから派生)
+- hotfix (mainから派生)  
 　公開中のもののバグ修正用ブランチ (hotfix-<Issue_number>-◯◯ 例: hotfix-1-xxなど)
-- feature (devから派生)
+- feature (devから派生)  
 　実装する機能毎のブランチ (feature-<Issue_number>-◯◯ 例: feature-1-xxなど)
-- docs (devから派生)
+- docs (devから派生)  
 　ドキュメントに対しての記述ブランチ (docs-<Issue_number>-◯◯ 例: docs-1-xxなど)
-- fix (devから派生)
+- fix (devから派生)  
 　開発中のもののバグ修正用ブランチ (fix-<Issue_number>-◯◯ 例: fix-1-xxなど)
 
 ## Projectについて
 
 Projectはタスク管理アプリのようなものです。  
-Snackでは5つの状態があります。  
-- In Considering
+Snackでは5つの状態があります。    
+- In Considering  
     考案中や実際に行うかわからないIssueを割り当てる
-- Todo
+- Todo  
     Projectでやる必要があるIssueを割り当てる
-- In Progress
+- In Progress  
     ある人がIssueに対して何かしらしている(ドキュメントなら記述、機能開発なら開発中)  
     Assigneesに誰かが割り当てられていいる
-- In Review
+- In Review  
     PRが作成されており、レビュー待ちの状態
-- Done
+- Done  
     Issueが解決された
 
 ## Issueについて
@@ -61,28 +61,27 @@ Snackでは5つの状態があります。
 
 ## Labelの種類
 
-- backend
+- backend  
     backendに対しての提案など
-- desktop
+- desktop  
     desktopに対しての提案など
-- mobile
+- mobile  
     mobile(iOS, Android)に対しての提案など
-- CI
+- CI  
     CI(Github Action)に対しての提案など
-- documentation
+- documentation  
     ドキュメントの整備など
-- enhancement
+- enhancement  
     新しい機能の追加など
-- good first issue
+- good first issue  
     開発に入ったときに最初に消化しやすいIssue
-- help wanted
+- help wanted  
     何か他の人の意見や実装のやり方がわからない時など
-- question
+- question  
     ある機能やドキュメントに対してわからないことがあった時など
-- search
+- search  
     何かしら障害なので調べる必要がある時など
-- duplicate
+- duplicate  
     IssueやPRがすでに作られていた時など
-- bug
+- bug  
     バグを見つけた時など
-
