@@ -1,3 +1,15 @@
+# Proto file 定義
+
+## protoからコード生成方法
+
+### Go言語のpbコード生成
+
+プロジェクトルートディレクトリで下記のコマンドを打つことで`backend/pb`に生成されます。  
+
+```sh
+$ protoc --proto_path=protobuf --go_out=backend/pb --go_opt=paths=source_relative --go-grpc_out=backend/pb --go-grpc_opt=paths=source_relative protobuf/**/*.proto
+```
+
 ## スキーマ以外の仕様
 
 protoで明記されていないメタデータなどの仕様
