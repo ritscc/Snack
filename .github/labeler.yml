@@ -8,4 +8,4 @@ protobuf: 'protobuf/**/*'
 
 web: 'web/**/*'
 
-CI: '.github/**/*'
+CI: '.github/workflows/*'
