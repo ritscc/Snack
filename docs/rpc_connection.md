@@ -13,7 +13,7 @@
 
 以下はクライアントの初期起動の際に接続を行う時のリクエストレスポンス図です。
 
-![](draw.oi/rpc_connection_initialization.svg)
+![](img/rpc_connection_initialization.svg)
 
 ### 基本的なRPC接続の説明
 
@@ -26,4 +26,4 @@ UserUpdatedイベントでユーザデータがアップデートされたのを
 
 以下はクライアントの基本的な変更操作の接続を行う時のリクエストレスポンス図です。
 
-![](draw.oi/rpc_connection.svg)
+![](img/rpc_connection.svg)
