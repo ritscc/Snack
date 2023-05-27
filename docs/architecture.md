@@ -2,4 +2,4 @@
 
 以下はアーキテクチャ図です。
 
-![](draw.oi/architecture.svg)
+![](img/architecture.svg)

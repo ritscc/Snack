@@ -1,5 +1,7 @@
 # RPC接続概要
 
+このドキュメントでは、RPCの接続を示しています。
+
 ## RPCの初期接続の説明
 
 クライアントの初期起動時はデータを持っていないため、サーバからデータを取得する必要がある。
@@ -13,7 +15,7 @@
 
 以下はクライアントの初期起動の際に接続を行う時のリクエストレスポンス図です。
 
-![](draw.oi/rpc_connection_initialization.svg)
+![](img/rpc_connection_initialization.svg)
 
 ### 基本的なRPC接続の説明
 
@@ -26,4 +28,4 @@ UserUpdatedイベントでユーザデータがアップデートされたのを
 
 以下はクライアントの基本的な変更操作の接続を行う時のリクエストレスポンス図です。
 
-![](draw.oi/rpc_connection.svg)
+![](img/rpc_connection.svg)
