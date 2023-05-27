@@ -7,3 +7,5 @@ mobile: 'mobile/**/*'
 protobuf: 'protobuf/**/*'
 
 web: 'web/**/*'
+
+CI: '.github/workflows/*'
