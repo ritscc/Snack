@@ -7,8 +7,10 @@ import (
 	"strconv"
 )
 
+// ValueNotFoundError error message for value not found
 const ValueNotFoundError = "%s is not found. this environment value must be set."
 
+// GetStrEnv get value
 func GetStrEnv(key string, required bool) (string, error) {
 	v, exist := os.LookupEnv(key)
 	if required && !exist {
@@ -18,6 +20,7 @@ func GetStrEnv(key string, required bool) (string, error) {
 	return v, nil
 }
 
+// GetIntEnv get int value
 func GetIntEnv(key string, required bool) (int, error) {
 	v, exists := os.LookupEnv(key)
 	if !exists {
