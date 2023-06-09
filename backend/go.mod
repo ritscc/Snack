@@ -1,4 +1,4 @@
-module github/ritscc/Snack
+module github.com/ritscc/Snack
 
 go 1.20
 
