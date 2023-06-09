@@ -21,16 +21,25 @@ import (
 	pbMessage "github.com/ritscc/Snack/pb/message/v1"
 )
 
+/*
+ * Configuration the grpc server.
+ */
 type Server struct {
     port int
 }
 
+/*
+ * Initalization the grpc server.
+ */
 func InitServer(port int) *Server {
 	return &Server{
 		port: port,
 	}
 }
 
+/*
+ * Start the grpc server.
+ */
 func(s *Server) StartServer() error {
 	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", s.port))
 	if err != nil {
@@ -74,6 +83,10 @@ func(s *Server) StartServer() error {
 	return nil
 }
 
+/*
+ * Get the signal issued when stopping Server with "CTRL+C". 
+ * This is used for Graceful Shutdown.
+ */
 func waitSIGINT() {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
