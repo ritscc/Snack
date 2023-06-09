@@ -1,9 +1,9 @@
 package driver
 
 import (
+	"fmt"
 	"log"
 	"net"
-	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -25,7 +25,7 @@ import (
  * Configuration the grpc server.
  */
 type Server struct {
-    port int
+	port int
 }
 
 /*
@@ -40,7 +40,7 @@ func InitServer(port int) *Server {
 /*
  * Start the grpc server.
  */
-func(s *Server) StartServer() error {
+func (s *Server) StartServer() error {
 	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", s.port))
 	if err != nil {
 		return err
@@ -54,16 +54,15 @@ func(s *Server) StartServer() error {
 	user := pbUser.UnimplementedUserServiceServer{}
 	userGroup := pbUserGroup.UnimplementedUserGroupServiceServer{}
 	memberGroup := pbUserGroup.UnimplementedMemberServiceServer{}
-  // stamp := stamppb.
+	// stamp := stamppb.
 	message := pbMessage.UnimplementedMessageServiceServer{}
 	pinMessage := pbMessage.UnimplementedPinMessageServiceServer{}
 	event := pbEvent.UnimplementedEventServiceServer{}
 	channel := pbChannel.UnimplementedChannelServiceServer{}
 	messageChannel := pbChannel.UnimplementedMessageChannelServiceServer{}
-	
 
 	pbAuth.RegisterAuthenticationServer(server, auth)
-  pbUser.RegisterUserServiceServer(server, user)
+	pbUser.RegisterUserServiceServer(server, user)
 	pbUserGroup.RegisterUserGroupServiceServer(server, userGroup)
 	pbUserGroup.RegisterMemberServiceServer(server, memberGroup)
 	pbMessage.RegisterMessageServiceServer(server, message)
@@ -84,7 +83,7 @@ func(s *Server) StartServer() error {
 }
 
 /*
- * Get the signal issued when stopping Server with "CTRL+C". 
+ * Get the signal issued when stopping Server with "CTRL+C".
  * This is used for Graceful Shutdown.
  */
 func waitSIGINT() {
