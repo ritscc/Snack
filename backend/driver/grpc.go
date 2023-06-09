@@ -54,7 +54,7 @@ func (s *Server) StartServer() error {
 	user := pbUser.UnimplementedUserServiceServer{}
 	userGroup := pbUserGroup.UnimplementedUserGroupServiceServer{}
 	memberGroup := pbUserGroup.UnimplementedMemberServiceServer{}
-	// stamp := stamppb.
+  // stamp := stamppb.
 	message := pbMessage.UnimplementedMessageServiceServer{}
 	pinMessage := pbMessage.UnimplementedPinMessageServiceServer{}
 	event := pbEvent.UnimplementedEventServiceServer{}
