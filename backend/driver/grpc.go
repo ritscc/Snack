@@ -3,6 +3,7 @@ package driver
 import (
 	"log"
 	"net"
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -20,8 +21,22 @@ import (
 	pbMessage "github.com/ritscc/Snack/pb/message/v1"
 )
 
+type Server struct {
+    port int
+}
 
-func StartServer(port net.Listener) {
+func InitServer(port int) *Server {
+	return &Server{
+		port: port,
+	}
+}
+
+func(s *Server) StartServer() error {
+	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", s.port))
+	if err != nil {
+		return err
+	}
+
 	server := grpc.NewServer()
 
 	reflection.Register(server)
@@ -49,12 +64,14 @@ func StartServer(port net.Listener) {
 	pbChannel.RegisterMessageChannelServiceServer(server, messageChannel)
 
 	log.Println("start gRPC server ...")
-	server.Serve(port)
+	server.Serve(listener)
 
 	waitSIGINT()
 
 	log.Println("stopping gRPC server...")
 	server.GracefulStop()
+
+	return nil
 }
 
 func waitSIGINT() {
