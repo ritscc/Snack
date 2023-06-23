@@ -48,5 +48,5 @@ message CreateUserRequest {
 }
 
 message GetUserRequest {
-  string user_id = 1;
+  int64 user_id = 1;
 }
