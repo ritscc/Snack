@@ -10,6 +10,7 @@ type User struct {
 	UserName  string   
 	Nick      string   
 	RealName  string   
+	Password  [64]byte
 	Avatar    string   
 	Role      string   
 	Locale    string   
@@ -28,10 +29,3 @@ type Service struct {
 	Discord string 
 }
 
-type UserService interface {
-	GetUser()
-	GetUsers()
-	CreateUser()
-	UpdateUser()
-	DeleteUser()
-}
