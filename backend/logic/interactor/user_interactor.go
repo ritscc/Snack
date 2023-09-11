@@ -1,29 +1,33 @@
 package interactor
 
 import (
-	"fmt"
 	"context"
 	"crypto/sha512"
+	"fmt"
 
 	"github.com/ritscc/Snack/domain/model"
-	"github.com/ritscc/Snack/logic/bto"
+	"github.com/ritscc/Snack/logic/dto"
 )
 
 type UserInteractor struct {
-	Users []*model.User
+	Users   []*model.User
 	Counter int64
 }
 
-func (interactor *UserInteractor) CreateUser(ctx context.Context, req *bto.CreateUserRequest) error {
+func NewUserInteractor() *UserInteractor {
+	return &UserInteractor{}
+}
+
+func (interactor *UserInteractor) CreateUser(ctx context.Context, req *dto.CreateUserRequest) error {
 	if interactor == nil {
 		return fmt.Errorf("UserInteractor is nil")
 	}
 
 	newUser := &model.User{
-		UserID: interactor.Counter,
-		UserName: req.Username,
+		UserID:    interactor.Counter,
+		UserName:  req.Username,
 		RitsEmail: req.Email,
-		Password: sha512.Sum512([]byte(req.Password)),
+		Password:  sha512.Sum512([]byte(req.Password)),
 	}
 
 	interactor.Users = append(interactor.Users, newUser)
@@ -50,7 +54,7 @@ func (interactor *UserInteractor) GetUser(ctx context.Context, userID int64) (*m
 	return user, nil
 }
 
-func (interactor *UserInteractor) UpdateUser(ctx context.Context,user *model.User) error {
+func (interactor *UserInteractor) UpdateUser(ctx context.Context, user *model.User) error {
 	if interactor == nil {
 		return fmt.Errorf("UserInteractor is nil")
 	}
@@ -61,8 +65,8 @@ func (interactor *UserInteractor) UpdateUser(ctx context.Context,user *model.Use
 			return nil
 		}
 	}
-	
-	return fmt.Errorf("Not such a user found")
+
+	return fmt.Errorf("not such a user found")
 }
 
 func (interactor *UserInteractor) DeleteUser(context.Context) error {
@@ -74,4 +78,3 @@ func (interactor *UserInteractor) DeleteUser(context.Context) error {
 
 	return nil
 }
-

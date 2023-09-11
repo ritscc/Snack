@@ -11,6 +11,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
+	"github.com/ritscc/Snack/adaptor/service_server"
 	pbAuth "github.com/ritscc/Snack/pb/authentication/v1"
 	pbUser "github.com/ritscc/Snack/pb/user/v1"
 	pbUserGroup "github.com/ritscc/Snack/pb/user_group/v1"
@@ -50,23 +51,23 @@ func (s *Server) StartServer() error {
 
 	reflection.Register(server)
 
-	auth := pbAuth.UnimplementedAuthenticationServer{}
-	user := pbUser.UnimplementedUserServiceServer{}
-	userGroup := pbUserGroup.UnimplementedUserGroupServiceServer{}
-	memberGroup := pbUserGroup.UnimplementedMemberServiceServer{}
-  // stamp := stamppb.
-	message := pbMessage.UnimplementedMessageServiceServer{}
-	pinMessage := pbMessage.UnimplementedPinMessageServiceServer{}
-	event := pbEvent.UnimplementedEventServiceServer{}
-	channel := pbChannel.UnimplementedChannelServiceServer{}
-	messageChannel := pbChannel.UnimplementedMessageChannelServiceServer{}
+	auth := service_server.InitAuthenticationService()
+	user := service_server.InitUserService()
+	userGroup := service_server.InitUserGroupService()
+	member := service_server.InitMemberService()
+	// stamp := stamppb.
+	message := service_server.InitMessageService()
+	// pinMessage := pbMessage.UnimplementedPinMessageServiceServer{}
+	event := service_server.InitEventService()
+	channel := service_server.InitChannelService()
+	messageChannel := service_server.InitMessageChannelService()
 
 	pbAuth.RegisterAuthenticationServer(server, auth)
 	pbUser.RegisterUserServiceServer(server, user)
 	pbUserGroup.RegisterUserGroupServiceServer(server, userGroup)
-	pbUserGroup.RegisterMemberServiceServer(server, memberGroup)
+	pbUserGroup.RegisterMemberServiceServer(server, member)
 	pbMessage.RegisterMessageServiceServer(server, message)
-	pbMessage.RegisterPinMessageServiceServer(server, pinMessage)
+	// pbMessage.RegisterPinMessageServiceServer(server, pinMessage)
 	pbEvent.RegisterEventServiceServer(server, event)
 	pbChannel.RegisterChannelServiceServer(server, channel)
 	pbChannel.RegisterMessageChannelServiceServer(server, messageChannel)

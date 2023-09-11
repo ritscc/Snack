@@ -13,12 +13,16 @@ import (
 )
 
 type UserService struct {
-	converter converter.UserConverter
-	interactor interactor.UserInteractor
+	converter  *converter.UserConverter
+	interactor *interactor.UserInteractor
+	pbUser.UnimplementedUserServiceServer
 }
 
 func InitUserService() *UserService {
-	return &UserService{}
+	return &UserService{
+		converter:  converter.NewUserConverter(),
+		interactor: interactor.NewUserInteractor(),
+	}
 }
 
 func (service *UserService) CreateUser(ctx context.Context, pbReq *pbUser.CreateUserRequest) (*emptypb.Empty, error) {
@@ -73,4 +77,3 @@ func (service *UserService) DeleteUser(ctx context.Context, e *emptypb.Empty) (*
 
 	return res, nil
 }
-
