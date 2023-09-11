@@ -7,7 +7,6 @@ import (
 	"strconv"
 )
 
-// ValueNotFoundError error message for value not found
 const ValueNotFoundError = "%s is not found. this environment value must be set."
 
 // GetStrEnv get value
