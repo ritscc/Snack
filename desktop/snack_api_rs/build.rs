@@ -2,8 +2,9 @@ use std::env::current_dir;
 
 fn main() -> Result<(), std::io::Error> {
     println!("cargo:rerun-if-changed=build.rs");
-    let binding = current_dir().unwrap();
-    let proto_root_path = binding.parent().unwrap().to_str().unwrap();
+    let current_dir = current_dir().unwrap();
+    let parent_dir = current_dir.parent().unwrap();
+    let proto_root_path = parent_dir.parent().unwrap().to_str().unwrap();
     let proto_path = [
         "authentication/v1/authentication.proto",
         "channel/v1/channel.proto",
