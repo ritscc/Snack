@@ -22,27 +22,20 @@ import (
 	pbMessage "github.com/ritscc/Snack/pb/message/v1"
 )
 
-/*
- * Configuration the grpc server.
- */
 type Server struct {
-	port int
+	serverConfig ServerConfig
 }
 
-/*
- * Initalization the grpc server.
- */
-func InitServer(port int) *Server {
+func NewServer(serverConfig ServerConfig) *Server {
 	return &Server{
-		port: port,
+		serverConfig: serverConfig,
 	}
 }
 
-/*
- * Start the grpc server.
- */
+// StartServer start the grpc server.
 func (s *Server) StartServer() error {
-	listener, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", s.port))
+	address := fmt.Sprintf("%s:%d", s.serverConfig.Host, s.serverConfig.Port)
+	listener, err := net.Listen("tcp", address)
 	if err != nil {
 		return err
 	}
