@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package snack.stamp.v1;
+package stamp.v1;
 
 import "google/protobuf/timestamp.proto";
 
