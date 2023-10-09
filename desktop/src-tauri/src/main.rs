@@ -15,6 +15,8 @@ use snack_desktop::user::query::{
 };
 
 fn main() {
+    let context = tauri::generate_context!();
+    let identifier = context.config().tauri.bundle.identifier.clone();
     tauri::Builder::default()
         .system_tray(create_systemtray())
         .on_system_tray_event(on_main_menu_event)
@@ -25,10 +27,10 @@ fn main() {
             get_test_channels
         ])
         .setup(move |_app| {
-            notification("Snack".into(), "Spawned!".into()).unwrap();
+            notification(identifier, "Snack".into(), "Spawned!".into()).unwrap();
             Ok(())
         })
-        .run(tauri::generate_context!())
+        .run(context)
         .expect("error while running tauri application");
 }
 
@@ -57,8 +59,6 @@ fn on_main_menu_event(app: &AppHandle<Wry>, event: SystemTrayEvent) {
     }
 }
 
-fn notification(title: String, body: String) -> Result<(), tauri::api::Error> {
-    let context = tauri::generate_context!();
-    let identifier = context.config().tauri.bundle.identifier.clone();
+fn notification(identifier: String, title: String, body: String) -> Result<(), tauri::api::Error> {
     Notification::new(identifier).title(title).body(body).show()
 }
