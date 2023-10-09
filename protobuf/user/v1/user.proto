@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package snack.user.v1;
+package user.v1;
 
 import "google/protobuf/empty.proto";
 
