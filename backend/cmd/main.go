@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ritscc/Snack/driver"
+	"github.com/ritscc/Snack/internal/driver"
 )
 
 func main() {

@@ -1,10 +1,11 @@
 package env
 
 import (
-	"github.com/stretchr/testify/assert"
 	"os"
 	"strconv"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func setValue(key string, value string) error {
