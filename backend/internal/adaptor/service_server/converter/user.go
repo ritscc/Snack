@@ -6,14 +6,7 @@ import (
 	pbUser "github.com/ritscc/Snack/pb/user/v1"
 )
 
-type UserConverter struct {
-}
-
-func NewUserConverter() *UserConverter {
-	return &UserConverter{}
-}
-
-func (converter UserConverter) UserTopbUser(user *model.User) *pbUser.User {
+func UserTopbUser(user *model.User) *pbUser.User {
 	return &pbUser.User{
 		UserId:    user.UserID,
 		Username:  user.UserName,
@@ -34,7 +27,7 @@ func (converter UserConverter) UserTopbUser(user *model.User) *pbUser.User {
 	}
 }
 
-func (converter UserConverter) PbUserToUser(user *pbUser.User) *model.User {
+func PbUserToUser(user *pbUser.User) *model.User {
 	return &model.User{
 		UserID:    user.UserId,
 		UserName:  user.Username,
@@ -55,7 +48,7 @@ func (converter UserConverter) PbUserToUser(user *pbUser.User) *model.User {
 	}
 }
 
-func (converter UserConverter) PbCreateUserRequestToCreateUserRequest(req *pbUser.CreateUserRequest) *dto.CreateUserRequest {
+func PbCreateUserRequestToCreateUserRequest(req *pbUser.CreateUserRequest) *dto.CreateUserRequest {
 	return &dto.CreateUserRequest{
 		Username: req.Username,
 		Email:    req.Email,
