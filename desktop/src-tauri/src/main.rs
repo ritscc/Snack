@@ -8,6 +8,7 @@ use tauri::{
     SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, Wry,
 };
 
+use snack_desktop::channel::query::{__cmd__get_test_channels, get_test_channels};
 use snack_desktop::message::query::{__cmd__get_test_messages, get_test_messages};
 use snack_desktop::user::query::{
     __cmd__get_test_user_data, __cmd__get_test_users_data, get_test_user_data, get_test_users_data,
@@ -20,7 +21,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             get_test_users_data,
             get_test_user_data,
-            get_test_messages
+            get_test_messages,
+            get_test_channels
         ])
         .setup(move |_app| {
             notification("Snack".into(), "Spawned!".into()).unwrap();

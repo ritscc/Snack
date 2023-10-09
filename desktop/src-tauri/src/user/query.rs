@@ -59,7 +59,7 @@ pub fn get_test_users_data() -> Vec<User> {
             is_deleted: false,
         },
         User {
-            id: 3,
+            id: 4,
             username: "deleted".into(),
             nick: "DELETED".into(),
             realname: "deletedくん".into(),
