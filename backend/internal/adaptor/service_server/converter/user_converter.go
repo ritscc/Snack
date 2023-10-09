@@ -1,10 +1,9 @@
 package converter
 
 import (
-	"github.com/ritscc/Snack/domain/model"
+	"github.com/ritscc/Snack/internal/domain/model"
+	"github.com/ritscc/Snack/internal/usecase/dto"
 	pbUser "github.com/ritscc/Snack/pb/user/v1"
-
-	"github.com/ritscc/Snack/logic/dto"
 )
 
 type UserConverter struct {

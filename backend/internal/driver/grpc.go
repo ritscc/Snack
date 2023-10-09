@@ -8,10 +8,10 @@ import (
 	"os/signal"
 	"syscall"
 
+	service_server2 "github.com/ritscc/Snack/internal/adaptor/service_server"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	"github.com/ritscc/Snack/adaptor/service_server"
 	pbAuth "github.com/ritscc/Snack/pb/authentication/v1"
 	pbUser "github.com/ritscc/Snack/pb/user/v1"
 	pbUserGroup "github.com/ritscc/Snack/pb/user_group/v1"
@@ -51,16 +51,16 @@ func (s *Server) StartServer() error {
 
 	reflection.Register(server)
 
-	auth := service_server.InitAuthenticationService()
-	user := service_server.InitUserService()
-	userGroup := service_server.InitUserGroupService()
-	member := service_server.InitMemberService()
+	auth := service_server2.InitAuthenticationService()
+	user := service_server2.InitUserService()
+	userGroup := service_server2.InitUserGroupService()
+	member := service_server2.InitMemberService()
 	// stamp := stamppb.
-	message := service_server.InitMessageService()
+	message := service_server2.InitMessageService()
 	// pinMessage := pbMessage.UnimplementedPinMessageServiceServer{}
-	event := service_server.InitEventService()
-	channel := service_server.InitChannelService()
-	messageChannel := service_server.InitMessageChannelService()
+	event := service_server2.InitEventService()
+	channel := service_server2.InitChannelService()
+	messageChannel := service_server2.InitMessageChannelService()
 
 	pbAuth.RegisterAuthenticationServer(server, auth)
 	pbUser.RegisterUserServiceServer(server, user)

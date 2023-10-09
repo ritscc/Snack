@@ -1,6 +1,6 @@
 package model
 
-// This event is used to notify the server or client side 
+// This event is used to notify the server or client side
 // when data changes are made.
 const (
 	UserCreated = iota

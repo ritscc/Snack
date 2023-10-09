@@ -5,8 +5,8 @@ import (
 	"crypto/sha512"
 	"fmt"
 
-	"github.com/ritscc/Snack/domain/model"
-	"github.com/ritscc/Snack/logic/dto"
+	"github.com/ritscc/Snack/internal/domain/model"
+	"github.com/ritscc/Snack/internal/usecase/dto"
 )
 
 type UserInteractor struct {

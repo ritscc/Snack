@@ -3,12 +3,12 @@ package service_server
 import (
 	"context"
 
+	"github.com/ritscc/Snack/internal/adaptor/service_server/converter"
+	"github.com/ritscc/Snack/internal/usecase/interactor"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 
-	"github.com/ritscc/Snack/adaptor/service_server/converter"
-	"github.com/ritscc/Snack/logic/interactor"
 	pbUser "github.com/ritscc/Snack/pb/user/v1"
 )
 
