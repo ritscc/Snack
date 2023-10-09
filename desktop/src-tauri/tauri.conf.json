@@ -10,12 +10,18 @@
     "version": "0.1.0"
   },
   "tauri": {
+    "pattern": {
+      "use": "brownfield"
+    },
     "allowlist": {
-      "all": true
+      "all": true,
+      "notification": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,
-      "category": "DeveloperTool",
+      "category": "SocialNetworking",
       "copyright": "",
       "deb": {
         "depends": []
@@ -28,7 +34,8 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "cc.rits.snack",
+      "shortDescription": "RCC Internal Messenger Application",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -38,7 +45,6 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
@@ -54,12 +60,19 @@
     },
     "windows": [
       {
+        "label": "Snack",
+        "title": "Snack",
+        "center": true,
         "fullscreen": false,
         "height": 600,
+        "width": 800,
         "resizable": true,
-        "title": "Snack",
-        "width": 800
+        "decorations": true
       }
-    ]
+    ],
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "snack_ui",
+  "name": "snack_desktop",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.11",
     "@mui/material": "^5.14.11",
+    "@tauri-apps/api": "^1.5.0",
     "next": "^13.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

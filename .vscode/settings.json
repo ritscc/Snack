@@ -1,0 +1,9 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./desktop/src-tauri/Cargo.toml",
+        "./desktop/snack_api_rs/Cargo.toml",
+        "./desktop/Cargo.toml",
+    ],
+    "editor.formatOnSave": true,
+    "rust-analyzer.showUnlinkedFileNotification": false,
+}
