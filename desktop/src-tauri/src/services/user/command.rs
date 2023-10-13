@@ -104,6 +104,7 @@ pub fn get_test_user_data(_id: i64) -> User {
     }
 }
 
+#[allow(dead_code)]
 async fn test_grpc_connect() {
     let mut client = UserServiceClient::connect("http://[::1]:50051")
         .await

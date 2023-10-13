@@ -23,12 +23,15 @@ chrono = { version = "0.4", features = ["serde"] }
 snack_api_rs = { path = "../snack_api_rs" }
 tonic = "0.10"
 prost = "0.12"
+log = "0.4"
 tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 
 [features]
 # by default Tauri runs in production mode
 # when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devPath` is an URL
-default = [ "custom-protocol" ]
+default = ["custom-protocol"]
 # this feature is used for production builds where `devPath` points to the filesystem
 # DO NOT remove this
-custom-protocol = [ "tauri/custom-protocol" ]
+custom-protocol = ["tauri/custom-protocol"]
