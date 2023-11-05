@@ -27,6 +27,7 @@ log = "0.4"
 tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
 tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+tauri-invoke-http = { git = "https://github.com/tauri-apps/tauri-invoke-http", branch = "dev" }
 
 [features]
 # by default Tauri runs in production mode

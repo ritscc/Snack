@@ -1,11 +1,16 @@
-'use client'
+"use client";
 
-import { invoke } from "@tauri-apps/api/tauri"
+import { invoke } from "@tauri-apps/api/tauri";
+import { get } from "http";
 
 async function get_test_channels() {
-    // Todo: Change Function: get_test_channels
-    const users = await invoke('get_test_channels').catch(err => {
-        console.error(err)
-        return null
-    })
+  try {
+    const users = await invoke("get_test_channels");
+    return users; // データを返すように修正
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 }
+
+export default get_test_channels;

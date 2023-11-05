@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Channnels from "../Channnels";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PersonIcon from "@mui/icons-material/Person";
@@ -6,15 +6,28 @@ import PrivateChat from "./PrivateChat";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import AddChannel from "./AddChannel";
+import get_test_channels from "@/api/channel";
 
 const SidebarChannels = () => {
   const [showAddChannel, setShowAddChannel] = useState(false);
+  const [channels, setChannels] = useState([]);
 
   const toggleAddChannel = () => {
     setShowAddChannel(!showAddChannel);
   };
 
+  useEffect(() => {
+    const getChannels = async () => {
+      const data = await get_test_channels();
+      console.log(data);
+    };
+    getChannels();
+  }, []);
+
   return (
+    //チャンネルデータを取得してきて表示する
+    //useEffectまたはuseSWRを使う
+
     <div className="hide-scrollbar relative   h-screen overflow-y-auto ">
       <Channnels icon="#" name="general" />
       <Channnels icon="#" name="announce" />
@@ -25,12 +38,21 @@ const SidebarChannels = () => {
           </span>
           スター付きチャンネル
         </div>
+        {/* <div className="ml-2">
+          {channels.map((channel) => (
+            <Channnels key={channel.id}  icon="#" name={channel.name} />
+          ))}
+        </div> */}
+
         <div className="ml-2">
-          <Channnels icon="#" name="general" />
+          {/* {channels.map((channel) => (
+            <Channnels key={channel.id}  icon="#" name={channel.name} />
+          ))} */}
+          {/* <Channnels icon="#" name="general" />
           <Channnels icon="#" name="announce" />
           <Channnels icon="#" name="general" />
           <Channnels icon="#" name="announce" />
-          <Channnels icon="#" name="general" />
+          <Channnels icon="#" name="general" /> */}
         </div>
       </div>
 
