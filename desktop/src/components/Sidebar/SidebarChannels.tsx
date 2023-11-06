@@ -6,22 +6,27 @@ import PrivateChat from "./PrivateChat";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import AddChannel from "./AddChannel";
-import get_test_channels from "@/api/channel";
+import get_test_channels, { DefaultChannel } from "@/api/channel";
 
 const SidebarChannels = () => {
   const [showAddChannel, setShowAddChannel] = useState(false);
-  const [channels, setChannels] = useState([]);
+  // useStateに型注釈<Channel[]>を追加
+  const [channels, setChannels] = useState<DefaultChannel[]>([]);
 
   const toggleAddChannel = () => {
     setShowAddChannel(!showAddChannel);
   };
-
   useEffect(() => {
-    const getChannels = async () => {
-      const data = await get_test_channels();
-      console.log(data);
+    const fetchChannels = async () => {
+      const channels = await get_test_channels();
+      if (channels) {
+        setChannels(channels);
+        console.log(channels);
+      } else {
+        console.log(channels);
+      }
     };
-    getChannels();
+    fetchChannels();
   }, []);
 
   return (
@@ -38,21 +43,10 @@ const SidebarChannels = () => {
           </span>
           スター付きチャンネル
         </div>
-        {/* <div className="ml-2">
-          {channels.map((channel) => (
-            <Channnels key={channel.id}  icon="#" name={channel.name} />
-          ))}
-        </div> */}
-
         <div className="ml-2">
-          {/* {channels.map((channel) => (
-            <Channnels key={channel.id}  icon="#" name={channel.name} />
-          ))} */}
-          {/* <Channnels icon="#" name="general" />
-          <Channnels icon="#" name="announce" />
-          <Channnels icon="#" name="general" />
-          <Channnels icon="#" name="announce" />
-          <Channnels icon="#" name="general" /> */}
+          {channels.map((channel) => (
+            <Channnels key={channel.channel_id} icon="#" name={channel.name} />
+          ))}
         </div>
       </div>
 
