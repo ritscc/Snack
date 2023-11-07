@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// 必要に応じて Channel 型をインポートする
 import Channnels from "../Channnels";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PersonIcon from "@mui/icons-material/Person";
@@ -6,24 +7,25 @@ import PrivateChat from "./PrivateChat";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import AddChannel from "./AddChannel";
-import get_test_channels, { DefaultChannel } from "@/api/channel";
+import get_test_channels, { Channel } from "@/api/channel"; // Channel 型をインポート
 
 const SidebarChannels = () => {
   const [showAddChannel, setShowAddChannel] = useState(false);
-  // useStateに型注釈<Channel[]>を追加
-  const [channels, setChannels] = useState<DefaultChannel[]>([]);
+  const [channels, setChannels] = useState<Channel[]>([]); // Channel[] 型注釈を使用
 
   const toggleAddChannel = () => {
     setShowAddChannel(!showAddChannel);
   };
+
   useEffect(() => {
     const fetchChannels = async () => {
-      const channels = await get_test_channels();
-      if (channels) {
-        setChannels(channels);
+      const fetchedChannels = await get_test_channels();
+      if (fetchedChannels) {
+        setChannels(fetchedChannels);
+
         console.log(channels);
       } else {
-        console.log(channels);
+        console.log("エラー");
       }
     };
     fetchChannels();
@@ -44,9 +46,20 @@ const SidebarChannels = () => {
           スター付きチャンネル
         </div>
         <div className="ml-2">
-          {channels.map((channel) => (
-            <Channnels key={channel.channel_id} icon="#" name={channel.name} />
-          ))}
+          {channels.map((channel) => {
+            // チャンネルタイプに応じた処理を実施
+            if ("DefaultChannel" in channel.type) {
+              return (
+                <Channnels
+                  key={channel.type.DefaultChannel.channel_id}
+                  icon="#"
+                  name={channel.type.DefaultChannel.name}
+                />
+              );
+            }
+            // DefaultChannel 以外の処理が必要な場合はここで実施
+            return null; // または適切なフォールバック UI をレンダリング
+          })}
         </div>
       </div>
 

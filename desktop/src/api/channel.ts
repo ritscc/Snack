@@ -1,37 +1,42 @@
-// channels.ts
-"use client";
 import { invoke } from "@tauri-apps/api/tauri";
-
-export type Channel = DefaultChannel | PrivateChannel | DmChannel;
+import { channel } from "diagnostics_channel";
 
 export interface DefaultChannel {
-  type: "DefaultChannel"; // Discriminated Union を使用
   channel_id: number;
   position: number;
   name: string;
   private: boolean;
   nsfw: boolean;
-  user_ids: number[]; // TypeScriptではVecを配列に対応させる
+  user_ids: number[]; // Rust の Vec<i64> は TypeScript で number[] に対応
 }
 
 export interface PrivateChannel {
-  type: "PrivateChannel"; // Discriminated Union を使用
   channel_id: number;
   user_id: number;
 }
 
 export interface DmChannel {
-  type: "DmChannel"; // Discriminated Union を使用
   channel_id: number;
   user_id: number;
   other_user_id: number;
 }
 
+// ChannelType ユニオン型を定義
+export type ChannelType =
+  | { DefaultChannel: DefaultChannel }
+  | { PrivateChannel: PrivateChannel }
+  | { DmChannel: DmChannel };
+
+// Channel インターフェースを定義
+export interface Channel {
+  type: ChannelType;
+}
+
 // get_test_channels関数の戻り値の型を修正
-async function get_test_channels(): Promise<DefaultChannel[] | null> {
+async function get_test_channels(): Promise<Channel[] | null> {
   try {
-    const response = await invoke("get_test_channels");
-    return response as DefaultChannel[];
+    const response: Channel[] = await invoke("get_test_channels");
+    return response;
   } catch (err) {
     console.error(err);
     return null;
