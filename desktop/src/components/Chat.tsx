@@ -1,14 +1,10 @@
 import React from "react";
+import Loading from "./Loading";
 
 const Chat = () => {
   return (
     <div className="hide-scrollbar h-screen w-full overflow-y-auto   bg-chat">
-      Chat
-      <div className="mt-40">aaa</div>
-      <div className="mt-40">aaa</div>
-      <div className="mt-40">aaa</div>
-      <div className="mt-40">aaa</div>
-      <div className="mt-40">aaa</div>
+      <Loading />
     </div>
   );
 };
