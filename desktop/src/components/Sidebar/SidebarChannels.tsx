@@ -7,6 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import AddChannel from "./AddChannel";
 import get_test_channels from "@/api/channel";
+import Link from "next/link";
 
 const SidebarChannels = () => {
   const [showAddChannel, setShowAddChannel] = useState(false);
@@ -29,7 +30,9 @@ const SidebarChannels = () => {
     //useEffectまたはuseSWRを使う
 
     <div className="hide-scrollbar relative   h-screen overflow-y-auto ">
-      <Channnels icon="#" name="general" />
+      <Link href="/channels/1">
+        <Channnels icon="#" name="general" />
+      </Link>
       <Channnels icon="#" name="announce" />
       <div className="ml-10 ">
         <div className="flex">
