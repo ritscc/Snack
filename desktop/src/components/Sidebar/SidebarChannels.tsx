@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// 必要に応じて Channel 型をインポートする
 import Channnels from "../Channnels";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PersonIcon from "@mui/icons-material/Person";
@@ -6,23 +7,30 @@ import PrivateChat from "./PrivateChat";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import AddChannel from "./AddChannel";
-import get_test_channels from "@/api/channel";
+
 import Link from "next/link";
+import get_test_channels, { Channel } from "@/api/channel"; // Channel 型をインポート
 
 const SidebarChannels = () => {
   const [showAddChannel, setShowAddChannel] = useState(false);
-  const [channels, setChannels] = useState([]);
+  const [channels, setChannels] = useState<Channel[]>([]); // Channel[] 型注釈を使用
 
   const toggleAddChannel = () => {
     setShowAddChannel(!showAddChannel);
   };
 
   useEffect(() => {
-    const getChannels = async () => {
-      const data = await get_test_channels();
-      console.log(data);
+    const fetchChannels = async () => {
+      const fetchedChannels = await get_test_channels();
+      if (fetchedChannels) {
+        setChannels(fetchedChannels);
+
+        console.log(channels);
+      } else {
+        console.log("エラー");
+      }
     };
-    getChannels();
+    fetchChannels();
   }, []);
 
   return (
@@ -41,21 +49,21 @@ const SidebarChannels = () => {
           </span>
           スター付きチャンネル
         </div>
-        {/* <div className="ml-2">
-          {channels.map((channel) => (
-            <Channnels key={channel.id}  icon="#" name={channel.name} />
-          ))}
-        </div> */}
-
         <div className="ml-2">
-          {/* {channels.map((channel) => (
-            <Channnels key={channel.id}  icon="#" name={channel.name} />
-          ))} */}
-          {/* <Channnels icon="#" name="general" />
-          <Channnels icon="#" name="announce" />
-          <Channnels icon="#" name="general" />
-          <Channnels icon="#" name="announce" />
-          <Channnels icon="#" name="general" /> */}
+          {channels.map((channel) => {
+            // チャンネルタイプに応じた処理を実施
+            if ("DefaultChannel" in channel.type) {
+              return (
+                <Channnels
+                  key={channel.type.DefaultChannel.channel_id}
+                  icon="#"
+                  name={channel.type.DefaultChannel.name}
+                />
+              );
+            }
+            // DefaultChannel 以外の処理が必要な場合はここで実施
+            return null; // または適切なフォールバック UI をレンダリング
+          })}
         </div>
       </div>
 
