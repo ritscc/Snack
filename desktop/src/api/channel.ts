@@ -1,5 +1,4 @@
 import { invoke } from "@tauri-apps/api/tauri";
-import { channel } from "diagnostics_channel";
 
 export interface DefaultChannel {
   channel_id: number;
