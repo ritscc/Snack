@@ -25,7 +25,6 @@ const ChannelPage = () => {
 
   // 新しいメッセージを追加する関数
   const addMessage = (content: string) => {
-    // ここでは具体的なユーザーIDやチャンネルIDの生成方法は省略しています
     const newMessage: Message = {
       message_id: Date.now(), // 仮のID生成
       channel_id: 1, // 仮のチャンネルID
@@ -33,7 +32,7 @@ const ChannelPage = () => {
       content: content,
       created_time: new Date(),
       updated_time: new Date(),
-      mention: undefined, // 適宜設定してください
+      mention: undefined, // 仮のメンション
       pinned: false,
       stamp_id: 0, // 仮のスタンプID
     };
@@ -45,7 +44,7 @@ const ChannelPage = () => {
       <div className="flex-grow">
         <Chat messages={messages} />
       </div>
-      <ChatInput onNewMessage={addMessage} />
+      <ChatInput sendNewMessage={addMessage} />
     </div>
   );
 };

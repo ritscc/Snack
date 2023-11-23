@@ -3,15 +3,15 @@ import { Input } from "../ui/input";
 import { useState } from "react";
 
 interface ChatInputProps {
-  onNewMessage: (message: string) => void;
+  sendNewMessage: (message: string) => void;
 }
 
-const ChatInput = ({ onNewMessage }: ChatInputProps) => {
+const ChatInput = ({ sendNewMessage }: ChatInputProps) => {
   const [inputText, setInputText] = useState("");
   const handleSendMessage = () => {
     if (inputText.trim()) {
-      onNewMessage(inputText);
-      setInputText(""); // メッセージ送信後に入力フィールドをクリア
+      sendNewMessage(inputText);
+      setInputText("");
     }
   };
 

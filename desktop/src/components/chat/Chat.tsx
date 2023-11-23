@@ -12,10 +12,11 @@ interface ChatProps {
 const Chat = ({ messages }: ChatProps) => {
   return (
     <div className="hide-scrollbar h-screen w-full overflow-y-auto   bg-chat">
-      {/* <Loading /> */}
+      {/*TODO: データ取得時にローディングコンポーネントの表示　 <Loading /> */}
       <div className="ml-3 space-y-4">
         {messages.map((message) => (
           <div key={message.message_id} className="flex items-start space-x-4">
+            {/*TODO: ユーザーの画像を表示 */}
             <Image
               src="/images/rcc-favicon.png"
               alt="RCCのfaviconです"
@@ -25,20 +26,21 @@ const Chat = ({ messages }: ChatProps) => {
             />
 
             <div className="space-y-2">
-              {/* ここにユーザー名を表示 */}
               <div className="flex">
+                {/* TODO: ここにユーザー名を表示  */}
                 <p className="h-4 w-[100px]">RCC太郎</p>
+                {/* 送信日時の表示 */}
                 <p className="text-xs">{new Date(message.created_time).toLocaleDateString()}</p>
               </div>
 
               <div className="flex space-x-1">
-                {/* ここにメッセージを表示 */}
+                {/* メッセージを表示  */}
                 {message.content}
               </div>
               <div className="flex space-x-1">
-                {/* ここにえもじを表表示 */}
+                {/* TODO: ここに絵文字を表表示 */}
                 <ThumbsUp className="text-yellow-500" />
-                {/* 言い値数を表示する */}
+                {/*TODO: いいね数を表示する */}
                 <span>4</span>
               </div>
             </div>
