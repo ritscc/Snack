@@ -1,5 +1,4 @@
-// import get_test_messages, { Message, useMessages } from "@/api/message";
-import { Message, useMessages } from "@/api/message";
+import get_test_messages, { Message } from "@/api/message";
 import Chat from "@/components/chat/Chat";
 import ChatHeader from "@/components/chat/ChatHeader";
 import ChatInput from "@/components/chat/ChatInput";
@@ -9,29 +8,20 @@ import { Laugh, PlusCircle, Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const ChannelPage = () => {
-  const { messages: pastMessages, isLoading, isError } = useMessages();
-  const [messages, setMessages] = useState<Message[]>([]);
-
+  const [messages, setMessages] = useState<Message[]>([]); // Message[] 型注釈を使用
   useEffect(() => {
-    if (pastMessages) {
-      setMessages(pastMessages);
+    // コンポーネントのマウント時にメッセージをロード
+    async function loadMessages() {
+      const loadedMessages = await get_test_messages();
+      if (loadedMessages) {
+        setMessages(loadedMessages);
+      } else {
+        console.log("エラー");
+      }
     }
-  }, [pastMessages]);
 
-  // const [messages, setMessages] = useState<Message[]>([]); // Message[] 型注釈を使用
-  // useEffect(() => {
-  //   // コンポーネントのマウント時にメッセージをロード
-  //   async function loadMessages() {
-  //     const loadedMessages = await get_test_messages();
-  //     if (loadedMessages) {
-  //       setMessages(loadedMessages);
-  //     } else {
-  //       console.log("エラー");
-  //     }
-  //   }
-
-  //   loadMessages();
-  // }, []);
+    loadMessages();
+  }, []);
 
   // 新しいメッセージを追加する関数
   const addMessage = (content: string) => {
@@ -48,10 +38,6 @@ const ChannelPage = () => {
     };
     setMessages([...messages, newMessage]);
   };
-
-  if (isLoading) return <Loading />;
-  if (isError) return <div>Error loading messages.</div>;
-
   return (
     <div className="w-full ">
       <ChatHeader />
