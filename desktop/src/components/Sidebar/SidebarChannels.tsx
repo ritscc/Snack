@@ -9,29 +9,34 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddChannel from "./AddChannel";
 
 import Link from "next/link";
-import get_test_channels, { Channel } from "@/api/channel"; // Channel 型をインポート
+import Loading from "../Loading";
+import { useChannels } from "@/api/channel";
+// import get_test_channels, { Channel } from "@/api/channel"; // Channel 型をインポート
 
 const SidebarChannels = () => {
   const [showAddChannel, setShowAddChannel] = useState(false);
-  const [channels, setChannels] = useState<Channel[]>([]); // Channel[] 型注釈を使用
+  // const [channels, setChannels] = useState<Channel[]>([]); // Channel[] 型注釈を使用
+  const { channels, isLoading, isError } = useChannels(); // useChannels フックを使用
 
   const toggleAddChannel = () => {
     setShowAddChannel(!showAddChannel);
   };
 
-  useEffect(() => {
-    const fetchChannels = async () => {
-      const fetchedChannels = await get_test_channels();
-      if (fetchedChannels) {
-        setChannels(fetchedChannels);
+  // useEffect(() => {
+  //   const fetchChannels = async () => {
+  //     const fetchedChannels = await get_test_channels();
+  //     if (fetchedChannels) {
+  //       setChannels(fetchedChannels);
 
-        console.log(channels);
-      } else {
-        console.log("エラー");
-      }
-    };
-    fetchChannels();
-  }, []);
+  //       console.log(channels);
+  //     } else {
+  //       console.log("エラー");
+  //     }
+  //   };
+  //   fetchChannels();
+  // }, []);
+  if (isLoading) return <Loading />;
+  if (isError) return <div>Error loading channels.</div>;
 
   return (
     //チャンネルデータを取得してきて表示する
@@ -50,15 +55,20 @@ const SidebarChannels = () => {
           スター付きチャンネル
         </div>
         <div className="ml-2">
-          {channels.map((channel) => {
+          {channels?.map((channel) => {
             // チャンネルタイプに応じた処理を実施
             if ("DefaultChannel" in channel.type) {
               return (
-                <Channnels
+                <Link
                   key={channel.type.DefaultChannel.channel_id}
-                  icon="#"
-                  name={channel.type.DefaultChannel.name}
-                />
+                  href={`/channels/${channel.type.DefaultChannel.channel_id}`}
+                >
+                  <Channnels
+                    key={channel.type.DefaultChannel.channel_id}
+                    icon="#"
+                    name={channel.type.DefaultChannel.name}
+                  />
+                </Link>
               );
             }
             // DefaultChannel 以外の処理が必要な場合はここで実施
