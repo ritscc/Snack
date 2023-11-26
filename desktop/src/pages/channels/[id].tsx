@@ -1,5 +1,4 @@
 // import get_test_messages, { Message, useMessages } from "@/api/message";
-//テストテスト
 import { Message, useMessages } from "@/api/message";
 import Chat from "@/components/chat/Chat";
 import ChatHeader from "@/components/chat/ChatHeader";
