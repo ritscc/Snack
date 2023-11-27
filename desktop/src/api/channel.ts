@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api/tauri";
+import useSWR from "swr";
 
 export interface DefaultChannel {
   channel_id: number;
@@ -31,15 +32,29 @@ export interface Channel {
   type: ChannelType;
 }
 
-// get_test_channels関数の戻り値の型を修正
-async function get_test_channels(): Promise<Channel[] | null> {
-  try {
-    const response: Channel[] = await invoke("get_test_channels");
-    return response;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
+// チャンネルデータを取得する関数
+const fetchChannels = (): Promise<Channel[]> => invoke("get_test_channels");
+
+// チャンネルデータを取得するカスタムフック
+export function useChannels() {
+  const { data, error } = useSWR<Channel[]>("get_test_channels", fetchChannels);
+
+  return {
+    channels: data,
+    isLoading: !error && !data,
+    isError: !!error,
+  };
 }
 
-export default get_test_channels;
+// get_test_channels関数の戻り値の型を修正
+// async function get_test_channels(): Promise<Channel[] | null> {
+//   try {
+//     const response: Channel[] = await invoke("get_test_channels");
+//     return response;
+//   } catch (err) {
+//     console.error(err);
+//     return null;
+//   }
+// }
+
+// export default get_test_channels;
