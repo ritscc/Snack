@@ -5,10 +5,12 @@ import HeadphonesIcon from "@mui/icons-material/Headphones";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 import USerData from "./USerData";
+import { useUser, useUsers } from "@/api/user";
 
 const SidebarHeader = () => {
+  // const { user, isLoading, isError } = useUser(1);
+  const { users } = useUsers();
   const [showUserData, setShowUserData] = useState(false);
-
   const toggleUserData = () => {
     setShowUserData(!showUserData);
   };
@@ -25,7 +27,7 @@ const SidebarHeader = () => {
             className="m-2 "
             onClick={toggleUserData}
           />
-          <div className="text-sm font-bold md:text-xl">RCC太郎</div>
+          <div className="text-sm font-bold md:text-xl">{users?.[1]?.username}</div>
         </div>
 
         <div className="mr-3 flex space-x-2 ">
