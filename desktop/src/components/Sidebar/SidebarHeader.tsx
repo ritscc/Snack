@@ -16,7 +16,7 @@ const SidebarHeader = () => {
   };
 
   return (
-    <div className=" border-b-2 border-slate-800 bg-sidebar ">
+    <div className=" border-b-2 border-gray-200 bg-sidebar ">
       <div className="flex items-center justify-between ">
         <div className="flex items-center justify-center">
           <Image

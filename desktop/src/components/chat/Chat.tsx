@@ -21,7 +21,7 @@ const Chat = ({ messages }: ChatProps) => {
   console.log(users);
 
   return (
-    <div className="hide-scrollbar h-screen w-full overflow-y-auto   bg-chat">
+    <div className="hide-scrollbar h-screen w-full overflow-y-auto   bg-chat text-chat-text">
       {/*TODO: データ取得時にローディングコンポーネントの表示　 <Loading /> */}
       <div className="ml-3 space-y-4">
         {messages.map((message) => (
@@ -36,7 +36,7 @@ const Chat = ({ messages }: ChatProps) => {
             />
 
             <div className="space-y-2">
-              <div className="flex">
+              <div className="flex text-slate-600">
                 {/* TODO: ここにメッセージごとのユーザー名を表示  */}
                 <p className="h-4 w-[100px]">{users?.[0]?.username}</p>
                 {/* 送信日時の表示 */}

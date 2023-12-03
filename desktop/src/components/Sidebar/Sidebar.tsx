@@ -4,7 +4,7 @@ import SidebarChannels from "./SidebarChannels";
 
 const Sidebar = () => {
   return (
-    <div className="relative w-4/12 overflow-hidden bg-sidebar text-slate-200">
+    <div className="relative w-4/12 overflow-hidden bg-sidebar  text-sidebar-text">
       <SidebarHeader />
 
       <SidebarChannels />

@@ -53,7 +53,7 @@ const ChannelPage = () => {
   if (isError) return <div>Error loading messages.</div>;
 
   return (
-    <div className="w-full ">
+    <div className="w-full  bg-chat">
       <ChatHeader />
       <div className="flex-grow">
         <Chat messages={messages} />

@@ -7,9 +7,9 @@ import Overlay from "./Overlay";
 const Online = () => {
   return (
     // オンライン
-    <div className="hide-scrollbar h-screen  w-3/12  overflow-y-auto  bg-online">
+    <div className="hide-scrollbar  h-screen  w-3/12  overflow-y-auto  bg-online text-online-text">
       <div className="">
-        <p className="mt-2 text-center text-slate-300">オンライン</p>
+        <p className="mt-2 text-center">オンライン</p>
         <OnlineUser name="Taro" imageSrc="/images/rcc-favicon.png" />
         <OnlineUser name="Hanako" imageSrc="/images/rcc-favicon.png" />
         <OnlineUser name="RCCTarou" imageSrc="/images/rcc-favicon.png" />
@@ -17,7 +17,7 @@ const Online = () => {
 
       {/* オフライン */}
       <div className="">
-        <p className="mt-2 text-center  text-slate-300">オフライン</p>
+        <p className="mt-2 text-center ">オフライン</p>
         <div className="relative">
           <Overlay />
 

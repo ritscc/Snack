@@ -11,7 +11,7 @@ const OfflineUser = ({ name, imageSrc }: UserProps) => {
   return (
     <div className="flex items-center">
       <Image src={imageSrc} alt={name} width={40} height={40} className="m-2 " />
-      <p className="text-slate-400">{name}</p>
+      <p className="text-online-text">{name}</p>
     </div>
   );
 };
