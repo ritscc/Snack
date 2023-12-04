@@ -13,14 +13,12 @@ import (
 )
 
 type UserService struct {
-	converter  *converter.UserConverter
 	interactor *interactor.UserInteractor
 	pbUser.UnimplementedUserServiceServer
 }
 
 func InitUserService() *UserService {
 	return &UserService{
-		converter:  converter.NewUserConverter(),
 		interactor: interactor.NewUserInteractor(),
 	}
 }
@@ -30,7 +28,7 @@ func (service *UserService) CreateUser(ctx context.Context, pbReq *pbUser.Create
 		return nil, status.Errorf(codes.Internal, "UserService is nil")
 	}
 
-	req := service.converter.PbCreateUserRequestToCreateUserRequest(pbReq)
+	req := converter.PbCreateUserRequestToCreateUserRequest(pbReq)
 	service.interactor.CreateUser(ctx, req)
 	res := new(emptypb.Empty)
 
@@ -47,7 +45,7 @@ func (service *UserService) GetUser(ctx context.Context, req *pbUser.GetUserRequ
 		return nil, status.Errorf(codes.Internal, "err")
 	}
 
-	pbUser := service.converter.UserTopbUser(user)
+	pbUser := converter.UserTopbUser(user)
 
 	return pbUser, nil
 }
@@ -57,7 +55,7 @@ func (service *UserService) UpdateUser(ctx context.Context, pbUser *pbUser.User)
 		return nil, status.Errorf(codes.Internal, "UserService is nil")
 	}
 
-	user := service.converter.PbUserToUser(pbUser)
+	user := converter.PbUserToUser(pbUser)
 	if err := service.interactor.UpdateUser(ctx, user); err != nil {
 		return nil, status.Errorf(codes.Internal, "err")
 	}
