@@ -17,7 +17,7 @@ const SidebarHeader = () => {
 
   return (
     <div className=" border-b-2 border-slate-800 bg-sidebar ">
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center ">
         <div className="flex items-center justify-center">
           <Image
             src="/images/rcc-favicon.png"
@@ -27,10 +27,10 @@ const SidebarHeader = () => {
             className="m-2 "
             onClick={toggleUserData}
           />
-          <div className="text-sm font-bold md:text-xl">{users?.[1]?.username}</div>
+          <div className="text-sm font-bold md:text-xl mr-2">{users?.[1]?.username}</div>
         </div>
 
-        <div className="mr-3 flex space-x-2 ">
+        <div className="flex ml-auto mr-1 space-x-1 ">
           <MicIcon />
           <HeadphonesIcon />
           <SettingsIcon />
